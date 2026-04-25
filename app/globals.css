@@ -227,7 +227,8 @@ nav {
   border-radius: 4px;
   overflow: hidden;
   z-index: 5;
-  will-change: width, height, top, left, border-radius;
+  will-change: transform, width, height, top, left, border-radius, opacity;
+  backface-visibility: hidden;
   box-shadow:
     0 4px 6px -1px rgba(0,0,0,0.08),
     0 24px 64px -12px rgba(0,0,0,0.45),
@@ -303,6 +304,12 @@ nav {
   50%      { transform: scaleY(0.4); opacity: 0.15; }
 }
 
+/* GPU hint for text blocks that animate on entrance */
+.hero-eyebrow, .hero-title, .hero-cta-group {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
 /* ── AFTER-SCROLL CONTENT ── */
 .post-expand {
   position: relative; z-index: 5;
@@ -331,8 +338,47 @@ nav {
 @media (max-width: 768px) {
   nav { padding: 1.25rem 1.5rem; }
   .nav-links, .nav-btn { display: none; }
-  .hero-top { padding: 0 1.5rem; padding-top: 6rem; }
-  .glass-badge { display: none; }
-  .media-expand-wrap { width: 240px; height: 300px; }
+
+  /* Text block: start from top, not vertically centered */
+  .hero-top {
+    padding: 0 1.5rem;
+    padding-top: 5.5rem;
+    align-items: flex-start;
+  }
+
+  /* Tighten eyebrow spacing */
+  .hero-eyebrow { margin-bottom: 1.25rem; }
+
+  /* Smaller title so it fits above the card */
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    line-height: 1.06;
+    margin-bottom: 1.25rem;
+  }
+
+  /*
+   * Card starts in the lower ~48 % of the viewport.
+   * Only translateX(-50%) so top: 52vh is the true top edge of the card.
+   * GSAP animates top → 0 and xPercent → 0 for the fullscreen expansion.
+   */
+  .media-expand-wrap {
+    top: 52vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 82vw;
+    height: 40vh;
+  }
+
+  /* Wall text: centered and readable at fullscreen on mobile */
+  .nh360-wall-text {
+    width: 88%;
+    white-space: normal;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .nh360-wall-title { font-size: clamp(1.9rem, 9vw, 2.6rem); }
+  .nh360-wall-sub   { font-size: 9px; letter-spacing: 0.22em; }
+
   .post-expand { padding: 4rem 1.5rem; }
 }

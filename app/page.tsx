@@ -13,6 +13,16 @@ export default function HomePage() {
   useEffect(() => {
     const scrollCue = scrollCueRef.current;
     if (!scrollCue) return;
+    const cue = scrollCue; // const alias — TS can't narrow refs through closures
+
+    /* ── REDUCED MOTION: skip all animations ── */
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set(['#nav', '#eyebrow', '#title', '#ctas', '#mediaCard'], {
+        opacity: 1, y: 0, clearProps: 'transform',
+      });
+      cue.classList.add('visible');
+      return;
+    }
 
     /* ── ENTRANCE TIMELINE ── */
     const enter = gsap.timeline({ defaults: { ease: 'power3.out' } });
@@ -23,55 +33,64 @@ export default function HomePage() {
       .to('#ctas',      { opacity: 1, y: 0, duration: 0.7 }, '-=0.5')
       .to('#mediaCard', { opacity: 1, duration: 0.6 }, '-=0.3')
       .to('#scrollCue', { opacity: 1, duration: 0.5 }, '-=0.1');
+    enter.add(() => { cue.classList.add('visible'); }, '+=0.3');
 
     /* ═══════════════════════════════════════════════════
-       SCROLL MEDIA EXPANSION
-       Image expands from small card → fullscreen.
-       All UI except logo fades out during expansion.
-       "Next Home 360" wall text fades in at fullscreen.
+       SCROLL MEDIA EXPANSION — responsive via matchMedia
+       Desktop: card centered in right half → fullscreen
+       Mobile:  card in lower half → fullscreen
     ═══════════════════════════════════════════════════ */
     const card       = document.getElementById('mediaCard');
     const imgOverlay = document.getElementById('imgOverlay');
     const wallText   = document.getElementById('wallText');
 
-    const expandTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: document.body,
-        start: 'top top',
-        end: '+=120%',
-        scrub: 1.2,
-        onUpdate: (self) => {
-          if (self.progress > 0.02) scrollCue.classList.remove('visible');
-          else                      scrollCue.classList.add('visible');
+    const mm = gsap.matchMedia();
+
+    function buildExpandTl(scrub: number, wallDelay: number) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: document.body,
+          start: 'top top',
+          end: '+=120%',
+          scrub,
+          onUpdate: (self) => {
+            if (self.progress > 0.02) cue.classList.remove('visible');
+            else                      cue.classList.add('visible');
+          },
         },
-      },
-    });
+      });
 
-    expandTl
-      /* Phase 1 (0→60%): card expands to fullscreen */
-      .to(card, {
-        width: '100%', height: '100%',
-        top: 0, left: 0,
-        xPercent: 0, yPercent: 0,
-        x: 0, y: 0,
-        borderRadius: 0,
-        ease: 'power2.inOut',
-        duration: 0.6,
-      }, 0)
-      /* Phase 1: dissolve all UI except logo */
-      .to('#eyebrow',  { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in' }, 0)
-      .to('#title',    { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in' }, 0.04)
-      .to('#ctas',     { opacity: 0, y: -12, duration: 0.28, ease: 'power2.in' }, 0.12)
-      .to('#scrollCue',{ opacity: 0,         duration: 0.2,  ease: 'power2.in' }, 0)
-      .to('.nav-links',{ opacity: 0,         duration: 0.25, ease: 'power2.in' }, 0.02)
-      .to('.nav-btn',  { opacity: 0,         duration: 0.25, ease: 'power2.in' }, 0.02)
-      /* Phase 2 (60→80%): dark overlay settles on image */
-      .to(imgOverlay,  { opacity: 1, duration: 0.2, ease: 'power1.out' }, 0.6)
-      /* Phase 3 (80→100%): wall text fades in */
-      .to(wallText,    { opacity: 1, duration: 0.3, ease: 'power2.out' }, 0.62);
+      tl
+        /* card expands to fullscreen */
+        .to(card, {
+          width: '100%', height: '100%',
+          top: 0, left: 0,
+          xPercent: 0, yPercent: 0,
+          x: 0, y: 0,
+          borderRadius: 0,
+          ease: 'power2.inOut',
+          duration: 0.6,
+          force3D: true,
+        }, 0)
+        /* dissolve UI */
+        .to('#eyebrow',  { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in', force3D: true }, 0)
+        .to('#title',    { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in', force3D: true }, 0.04)
+        .to('#ctas',     { opacity: 0, y: -12, duration: 0.28, ease: 'power2.in', force3D: true }, 0.12)
+        .to('#scrollCue',{ opacity: 0, duration: 0.2,  ease: 'power2.in' }, 0)
+        .to('.nav-links',{ opacity: 0, duration: 0.25, ease: 'power2.in' }, 0.02)
+        .to('.nav-btn',  { opacity: 0, duration: 0.25, ease: 'power2.in' }, 0.02)
+        /* overlay settles */
+        .to(imgOverlay,  { opacity: 1, duration: 0.2, ease: 'power1.out' }, 0.6)
+        /* wall text once fully fullscreen */
+        .to(wallText,    { opacity: 1, duration: 0.3, ease: 'power2.out' }, wallDelay);
 
-    /* Show scroll cue after entrance completes */
-    enter.add(() => { scrollCue.classList.add('visible'); }, '+=0.3');
+      return () => tl.kill();
+    }
+
+    /* desktop: scrub 1.2, wall text at 62% */
+    mm.add('(min-width: 769px)', () => buildExpandTl(1.2, 0.62));
+    /* mobile: slightly longer scrub, wall text delayed to 75% */
+    mm.add('(max-width: 768px)', () => buildExpandTl(1.5, 0.75));
 
     /* ── POST-EXPAND REVEAL ── */
     gsap.to('#postExpand', {
@@ -103,10 +122,10 @@ export default function HomePage() {
     ctaBtn?.addEventListener('click', scrollToFullscreen);
     navLink?.addEventListener('click', scrollToFullscreen);
 
-    /* Initial scroll cue */
-    const cueTimer = setTimeout(() => { scrollCue.classList.add('visible'); }, 1800);
+    const cueTimer = setTimeout(() => { cue.classList.add('visible'); }, 1800);
 
     return () => {
+      mm.kill();
       ScrollTrigger.getAll().forEach((t) => t.kill());
       window.removeEventListener('resize', onResize);
       ctaBtn?.removeEventListener('click', scrollToFullscreen);
@@ -150,9 +169,9 @@ export default function HomePage() {
                 <span className="eyebrow-text">La tua agenzia immobiliare di fiducia</span>
               </div>
               <h1 className="hero-title" id="title">
-                Diamo valore <br /> 
-                al tuo passato,  <br />
-                per offrirti un  <br />
+                Diamo valore <br />
+                al tuo passato, <br />
+                per offrirti un <br />
                 <em>futuro ideale.</em>
               </h1>
               <div className="hero-cta-group" id="ctas">
@@ -165,15 +184,18 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* MEDIA EXPANSION */}
+        {/* MEDIA EXPANSION — responsive image source */}
         <div className="media-expand-wrap" id="mediaCard">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className="media-img"
-            style={{ objectPosition: 'center 40%' }}
-            src="/hero.jpg"
-            alt="Proprietà luxury Milano"
-          />
+          <picture>
+            <source media="(max-width: 768px)" srcSet="/hero-mobile.png" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="media-img"
+              style={{ objectPosition: 'center 40%' }}
+              src="/hero.jpg"
+              alt="Proprietà luxury Milano"
+            />
+          </picture>
           <div className="media-overlay" id="imgOverlay" />
           <div className="nh360-wall-text" id="wallText">
             <span className="nh360-wall-title">Next Home 360</span>
