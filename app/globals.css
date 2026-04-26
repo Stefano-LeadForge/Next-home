@@ -433,12 +433,12 @@ nav {
 
 /* ══════════════════════════════════════
    HERO EXIT ZONE
-   120vh of scroll space while hero stays
-   pinned — CTA overlay is visible here
+   140vh of scroll space while hero stays
+   pinned — wall text is visible here
 ══════════════════════════════════════ */
 .hero-exit-zone {
   position: relative;
-  height: 120vh;
+  height: 140vh;
   z-index: 5;
   pointer-events: none;
 }

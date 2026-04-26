@@ -93,16 +93,16 @@ export default function HomePage() {
     /* mobile: slightly longer scrub, wall text delayed to 75% */
     mm.add('(max-width: 768px)', () => buildExpandTl(1.5, 0.75));
 
-    /* ── HERO EXIT — hero translates up & fades as portfolio takes over ── */
+    /* ── HERO EXIT — hero clears viewport before portfolio takes over ── */
     gsap.to('#heroWrap', {
-      y: () => -window.innerHeight * 0.18,
+      y: () => -window.innerHeight * 0.45,
       opacity: 0,
       ease: 'none',
       scrollTrigger: {
         trigger: '#nextSection',
         start: 'top bottom',
-        end: 'top top',
-        scrub: 1.2,
+        end: 'top 55%',
+        scrub: 1.0,
         invalidateOnRefresh: true,
       },
     });
