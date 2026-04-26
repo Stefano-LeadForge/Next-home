@@ -830,26 +830,27 @@ nav {
   justify-content: center;
 }
 
-/* semi-transparent overlay on the wall area */
+/* overlay: enhances wall readability, blends furniture into dark page bottom */
 .cta-finale-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(232,228,220,0.18) 0%,
-    rgba(232,228,220,0.08) 38%,
-    rgba(232,228,220,0.0)  50%,
-    rgba(8,22,31,0.0)      100%
+    rgba(245,241,234,0.22) 0%,
+    rgba(245,241,234,0.08) 30%,
+    transparent            44%,
+    rgba(8,22,31,0.20)     72%,
+    rgba(8,22,31,0.60)     100%
   );
   z-index: 1;
 }
 
-/* content in the top 40% — the wall area */
+/* content sits within the wall — top ~44% of the image */
 .cta-finale-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 6vh 3rem 0;
-  max-width: 700px;
+  padding: clamp(4vh, 5.5vmin, 8vh) 3rem 0;
+  max-width: 640px;
 }
 
 .cta-finale-eyebrow {
@@ -919,6 +920,7 @@ nav {
 }
 
 @media (max-width: 768px) {
-  .cta-finale-content { padding: 5vh 1.5rem 0; }
-  .cta-finale-headline { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+  .cta-finale-content { padding: clamp(3vh, 5vmin, 6vh) 1.5rem 0; max-width: 90vw; }
+  .cta-finale-headline { font-size: clamp(1.7rem, 6.5vw, 2.4rem); }
+  .cta-finale-text { font-size: 13px; margin-bottom: 1.75rem; }
 }

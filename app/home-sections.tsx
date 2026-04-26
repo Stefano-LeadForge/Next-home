@@ -161,11 +161,11 @@ export default function HomeSections() {
       {/* ══ CTA FINALE ══ */}
       <section className="cta-finale" id="ctaFinale">
         <Image
-          src="/cta-finale.jpg"
+          src="/sfondo-home-fine.png"
           alt="Interno luxury — valutazione immobiliare"
           fill
           sizes="100vw"
-          style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
+          style={{ objectFit: 'cover', objectPosition: 'center top' }}
           priority
         />
         <div className="cta-finale-overlay" />
