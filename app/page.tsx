@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import HomeSections from './home-sections';
+import { useLenis } from '@/components/SmoothScrolling';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -10,6 +11,9 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export default function HomePage() {
   const scrollCueRef = useRef<HTMLDivElement>(null);
+  const lenisCtx = useLenis();
+  const lenisRef = useRef(lenisCtx);
+  lenisRef.current = lenisCtx; // always current inside effect closures
 
   useEffect(() => {
     const scrollCue = scrollCueRef.current;
@@ -115,11 +119,12 @@ export default function HomePage() {
     function scrollToFullscreen(e: Event) {
       e.preventDefault();
       const target = window.innerHeight * 1.2;
-      gsap.to(window, {
-        scrollTo: { y: target, autoKill: false },
-        duration: 3.6,
-        ease: 'none',
-      });
+      const lenis = lenisRef.current;
+      if (lenis) {
+        lenis.scrollTo(target, { duration: 3.6, easing: (x: number) => x });
+      } else {
+        gsap.to(window, { scrollTo: { y: target, autoKill: false }, duration: 3.6, ease: 'none' });
+      }
     }
 
     const ctaBtn  = document.getElementById('ctaScroll');

@@ -1,0 +1,45 @@
+'use client';
+
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import Lenis from '@studio-freight/lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const LenisContext = createContext<Lenis | null>(null);
+
+export const useLenis = () => useContext(LenisContext);
+
+export default function SmoothScrolling({ children }: { children: ReactNode }) {
+  const [lenis, setLenis] = useState<Lenis | null>(null);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const instance = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    setLenis(instance);
+
+    // Drive Lenis from GSAP's ticker — keeps Lenis and ScrollTrigger frame-perfect
+    function onTick(time: number) {
+      instance.raf(time * 1000);
+    }
+    gsap.ticker.add(onTick);
+    gsap.ticker.lagSmoothing(0);
+
+    // Notify ScrollTrigger on every Lenis scroll frame
+    instance.on('scroll', ScrollTrigger.update);
+
+    return () => {
+      gsap.ticker.remove(onTick);
+      instance.destroy();
+    };
+  }, []);
+
+  return <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>;
+}
