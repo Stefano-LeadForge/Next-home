@@ -93,13 +93,17 @@ export default function HomePage() {
     /* mobile: slightly longer scrub, wall text delayed to 75% */
     mm.add('(max-width: 768px)', () => buildExpandTl(1.5, 0.75));
 
-    /* ── POST-EXPAND REVEAL ── */
-    gsap.to('#postExpand', {
-      opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+    /* ── HERO EXIT — hero translates up & fades as portfolio takes over ── */
+    gsap.to('#heroWrap', {
+      y: () => -window.innerHeight * 0.18,
+      opacity: 0,
+      ease: 'none',
       scrollTrigger: {
-        trigger: '#postExpand',
-        start: 'top 85%',
-        toggleActions: 'play none none none',
+        trigger: '#nextSection',
+        start: 'top bottom',
+        end: 'top top',
+        scrub: 1.2,
+        invalidateOnRefresh: true,
       },
     });
 
