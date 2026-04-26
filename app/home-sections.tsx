@@ -1,7 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -43,46 +42,8 @@ const ARTICLES = [
 ];
 
 export default function HomeSections() {
-  const { scrollY } = useScroll();
-  const [ctaVisible, setCtaVisible] = useState(false);
-
-  /* CTA overlay: appears when hero expansion is starting (≈5% vh scroll),
-     disappears when portfolio section is fully in view (≈220% vh) */
-  useMotionValueEvent(scrollY, 'change', (latest) => {
-    const h = window.innerHeight;
-    setCtaVisible(latest > h * 0.05 && latest < h * 2.2);
-  });
-
   return (
     <>
-      {/* ══ CTA OVERLAY — fixed, appears over the fullscreen hero image ══ */}
-      <motion.div
-        className="cta-overlay"
-        initial={false}
-        animate={ctaVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-        transition={{ duration: 0.9, ease }}
-        style={{ pointerEvents: ctaVisible ? 'auto' : 'none' }}
-      >
-        <div className="cta-overlay-text">
-          <div className="cta-overlay-eyebrow">
-            <div className="cta-overlay-eyebrow-line" />
-            <span className="cta-overlay-eyebrow-txt">Next Home 360</span>
-          </div>
-          <h2 className="cta-overlay-title">
-            Il tuo immobile lavora<br />
-            per te mentre <em>lo vendiamo.</em>
-          </h2>
-          <p className="cta-overlay-body">
-            Gestiamo affitti brevi di alta qualità per massimizzare i ricavi durante
-            l&apos;intera fase di vendita. Zero pensieri, massima redditività.
-          </p>
-        </div>
-        <a href="#" className="cta-overlay-btn">
-          <span>Scopri il servizio</span>
-          <span className="arr" />
-        </a>
-      </motion.div>
-
       {/* ══ HERO EXIT ZONE — 120vh scroll space while hero stays pinned ══ */}
       <div className="hero-exit-zone" />
 

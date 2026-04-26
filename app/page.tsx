@@ -207,6 +207,10 @@ export default function HomePage() {
             <span className="nh360-wall-sub">
               L&apos;unico servizio che massimizza il valore della tua casa
             </span>
+            <a href="#" className="nh360-wall-btn">
+              <span>Scopri Next Home 360</span>
+              <span className="arr" />
+            </a>
           </div>
         </div>
 
