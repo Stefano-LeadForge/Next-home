@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import HomeSections from './home-sections';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -214,14 +215,7 @@ export default function HomePage() {
       </div>
       {/* /sticky hero */}
 
-      {/* ══ POST-EXPAND CONTENT ══ */}
-      <div className="post-expand" id="postExpand">
-        <div className="post-expand-eyebrow">Il nostro portfolio</div>
-        <h2 className="post-expand-title">
-          Residenze selezionate<br />
-          per chi non <em>scende a compromessi.</em>
-        </h2>
-      </div>
+      <HomeSections />
     </>
   );
 }
