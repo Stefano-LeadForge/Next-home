@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SmoothScrolling from "@/components/SmoothScrolling";
+import StaticNav from "@/components/StaticNav";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "NextHome — Luxury Real Estate",
@@ -21,7 +23,11 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <SmoothScrolling>{children}</SmoothScrolling>
+        <StaticNav />
+        <SmoothScrolling>
+          {children}
+          <Footer />
+        </SmoothScrolling>
       </body>
     </html>
   );
