@@ -92,23 +92,39 @@ export default function HomePage() {
       return () => tl.kill();
     }
 
-    /* desktop: scrub 1.2, wall text at 62% */
-    mm.add('(min-width: 769px)', () => buildExpandTl(1.2, 0.62));
-    /* mobile: slightly longer scrub, wall text delayed to 75% */
-    mm.add('(max-width: 768px)', () => buildExpandTl(1.5, 0.75));
-
-    /* ── HERO EXIT — hero clears viewport before portfolio takes over ── */
-    gsap.to('#heroWrap', {
-      y: () => -window.innerHeight * 0.45,
-      opacity: 0,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#nextSection',
-        start: 'top bottom',
-        end: 'top 55%',
-        scrub: 1.0,
-        invalidateOnRefresh: true,
-      },
+    /* desktop: lower scrub matches Lenis lerp timing → consistent feel page-wide */
+    mm.add('(min-width: 769px)', () => {
+      const cleanupExpand = buildExpandTl(0.5, 0.62);
+      const exitTween = gsap.to('#heroWrap', {
+        y: () => -window.innerHeight * 0.45,
+        opacity: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#nextSection',
+          start: 'top bottom',
+          end: 'top 55%',
+          scrub: 0.4,
+          invalidateOnRefresh: true,
+        },
+      });
+      return () => { cleanupExpand(); exitTween.kill(); };
+    });
+    /* mobile: keep original scrub values — mobile feel is already correct */
+    mm.add('(max-width: 768px)', () => {
+      const cleanupExpand = buildExpandTl(1.5, 0.75);
+      const exitTween = gsap.to('#heroWrap', {
+        y: () => -window.innerHeight * 0.45,
+        opacity: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#nextSection',
+          start: 'top bottom',
+          end: 'top 55%',
+          scrub: 1.0,
+          invalidateOnRefresh: true,
+        },
+      });
+      return () => { cleanupExpand(); exitTween.kill(); };
     });
 
     /* ── RECALC on resize ── */
