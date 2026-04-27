@@ -17,9 +17,14 @@ export default function SmoothScrolling({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    // Uniform scroll normalization across all browsers
+    ScrollTrigger.normalizeScroll(true);
+
     const instance = new Lenis({
-      lerp: 0.1,
+      lerp: 0.08,
       smoothWheel: true,
+      syncTouch: true,
+      wheelMultiplier: 1.0,
     });
 
     setLenis(instance);
