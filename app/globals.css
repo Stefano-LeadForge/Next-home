@@ -1100,7 +1100,7 @@ nav.nav--solid {
   position: sticky; top: 0; z-index: 100;
   background: #0B1D26;
   padding: 1.25rem 3.5rem;
-  display: flex; align-items: center;
+  display: flex; align-items: center; justify-content: space-between;
   border-bottom: 1px solid rgba(194,205,214,0.08);
 }
 .static-header-logo {
@@ -1566,4 +1566,127 @@ nav.nav--solid {
   .blog-page-grid { padding: 0 1.5rem 4rem; }
   .valuta-form-section { padding: 0 1.5rem 4rem; }
   .valuta-row { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════
+   NAV DROPDOWN (homepage + StaticNav)
+══════════════════════════════════════ */
+.nav-has-dropdown { position: relative; }
+
+.nav-dropdown-trigger {
+  display: inline-flex; align-items: center; gap: 5px; cursor: pointer;
+}
+
+.nav-chevron {
+  display: inline-flex; align-items: center;
+  opacity: 0.6; transition: transform 220ms ease, opacity 220ms ease;
+}
+.nav-has-dropdown:hover .nav-chevron,
+.nav-has-dropdown.is-open .nav-chevron { transform: rotate(180deg); opacity: 1; }
+
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 14px); left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  min-width: 152px;
+  background: #0b1d26;
+  border: 1px solid rgba(194,205,214,0.13);
+  border-radius: 6px; padding: 0.4rem 0;
+  opacity: 0; pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+  z-index: 110;
+}
+/* caret */
+.nav-dropdown::before {
+  content: ''; position: absolute;
+  top: -5px; left: 50%; transform: translateX(-50%) rotate(45deg);
+  width: 8px; height: 8px;
+  background: #0b1d26;
+  border-left: 1px solid rgba(194,205,214,0.13);
+  border-top: 1px solid rgba(194,205,214,0.13);
+}
+/* open via CSS hover (homepage desktop nav) */
+.nav-has-dropdown:hover .nav-dropdown {
+  opacity: 1; pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+/* open via React state (StaticNav) */
+.nav-has-dropdown.is-open .nav-dropdown {
+  opacity: 1; pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown-item {
+  display: block; padding: 0.6rem 1.25rem;
+  font-size: 10px; font-weight: 300; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(246,244,241,0.6);
+  text-decoration: none;
+  transition: color 150ms ease, background 150ms ease;
+}
+.nav-dropdown-item:hover { color: var(--white); background: rgba(255,255,255,0.05); }
+
+.nav-dropdown-divider { height: 1px; background: rgba(194,205,214,0.1); margin: 0.3rem 0; }
+
+/* ══════════════════════════════════════
+   STATIC NAV RIGHT LINKS
+══════════════════════════════════════ */
+.static-nav-right {
+  display: flex; align-items: center; gap: 2.5rem;
+}
+.static-nav-links {
+  display: flex; align-items: center; gap: 1.75rem;
+  list-style: none; margin: 0; padding: 0;
+}
+.static-nav-link {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10.5px; font-weight: 300; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(246,244,241,0.6);
+  text-decoration: none; background: none; border: none; cursor: pointer; padding: 0;
+  display: inline-flex; align-items: center; gap: 4px;
+  transition: color 200ms ease;
+}
+.static-nav-link:hover { color: var(--white); }
+
+.static-nav-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 400; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--white); text-decoration: none;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid rgba(194,205,214,0.2); border-radius: 3px;
+  white-space: nowrap;
+  transition: background 250ms ease, border-color 250ms ease;
+}
+.static-nav-btn:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(194,205,214,0.35);
+}
+
+@media (max-width: 900px) { .static-nav-right { display: none; } }
+
+/* ══════════════════════════════════════
+   MOBILE MENU SUB-LINKS (Portfolio)
+══════════════════════════════════════ */
+.mobile-menu-sub {
+  display: flex; align-items: center; gap: 1.25rem; justify-content: center;
+  margin-top: 0.35rem; margin-bottom: 0.5rem;
+}
+.mobile-menu-sub-link {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300; font-size: clamp(1rem, 3.5vw, 1.4rem);
+  letter-spacing: 0.06em; color: rgba(246,244,241,0.4);
+  text-decoration: none; transition: color 200ms ease;
+}
+.mobile-menu-sub-link:hover { color: rgba(246,244,241,0.85); }
+.mobile-menu-sub-sep { color: rgba(246,244,241,0.2); font-size: 0.85rem; }
+
+/* ══════════════════════════════════════
+   PORTFOLIO MAIN PAGE — nav-cards wrap
+══════════════════════════════════════ */
+.portfolio-nav-wrap {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 3.5rem 6rem;
+}
+@media (max-width: 768px) {
+  .portfolio-nav-wrap { padding: 0 1.5rem 4rem; }
 }

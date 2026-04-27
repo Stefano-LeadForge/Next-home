@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { ChevronDown } from 'lucide-react';
 import HomeSections from './home-sections';
 import { useLenis } from '@/components/SmoothScrolling';
 import gsap from 'gsap';
@@ -237,7 +238,17 @@ export default function HomePage() {
         </div>
         <ul className="nav-links">
           <li><a href="#" id="navNH360">Next Home 360</a></li>
-          <li><a href="/portfolio">Portfolio</a></li>
+          <li className="nav-has-dropdown">
+            <span className="nav-dropdown-trigger">
+              <a href="/portfolio">Portfolio</a>
+              <span className="nav-chevron"><ChevronDown size={11} strokeWidth={1.5} /></span>
+            </span>
+            <div className="nav-dropdown">
+              <a href="/portfolio/vendite" className="nav-dropdown-item">Vendite</a>
+              <div className="nav-dropdown-divider" />
+              <a href="/portfolio/affitti" className="nav-dropdown-item">Affitti</a>
+            </div>
+          </li>
           <li><a href="/blog">Blog</a></li>
         </ul>
         <a href="/valuta-casa" className="nav-btn">Valuta la tua casa</a>
@@ -252,7 +263,14 @@ export default function HomePage() {
       <div className="mobile-menu" id="mobileMenu">
         <ul className="mobile-menu-list">
           <li><a href="#" className="mobile-menu-link" id="mobileNavNH360">Next Home 360</a></li>
-          <li><a href="/portfolio" className="mobile-menu-link">Portfolio</a></li>
+          <li>
+            <a href="/portfolio" className="mobile-menu-link">Portfolio</a>
+            <div className="mobile-menu-sub">
+              <a href="/portfolio/vendite" className="mobile-menu-sub-link">Vendite</a>
+              <span className="mobile-menu-sub-sep">·</span>
+              <a href="/portfolio/affitti" className="mobile-menu-sub-link">Affitti</a>
+            </div>
+          </li>
           <li><a href="/blog" className="mobile-menu-link">Blog</a></li>
         </ul>
         <div className="mobile-menu-divider" />

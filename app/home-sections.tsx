@@ -75,12 +75,12 @@ export default function HomeSections() {
 
         <div className="portfolio-grid">
           {[
-            { id: 1, src: '/copertina-affitto.png', alt: 'Case in Affitto Milano', line2: 'Affitto', delay: 0.1 },
-            { id: 2, src: '/copertina-vendita.png', alt: 'Case in Vendita Milano', line2: 'Vendita', delay: 0.22 },
-          ].map(({ id, src, alt, line2, delay }) => (
+            { id: 1, src: '/copertina-affitto.png', alt: 'Case in Affitto Milano', line2: 'Affitto', href: '/portfolio/affitti', delay: 0.1 },
+            { id: 2, src: '/copertina-vendita.png', alt: 'Case in Vendita Milano', line2: 'Vendita', href: '/portfolio/vendite', delay: 0.22 },
+          ].map(({ id, src, alt, line2, href, delay }) => (
             <motion.a
               key={id}
-              href="/portfolio"
+              href={href}
               className="portfolio-card"
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
