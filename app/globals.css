@@ -1721,3 +1721,29 @@ nav.nav--solid {
 @media (max-width: 768px) {
   .portfolio-nav-wrap { padding: 0 1.5rem 4rem; }
 }
+
+/* ══════════════════════════════════════
+   NEXT HOME 360 PAGE
+══════════════════════════════════════ */
+.nh360-page { min-height: 100vh; }
+
+.nh360-cs-block {
+  margin-top: 3rem;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;
+}
+
+.nh360-cs-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 400; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--silver);
+  border: 1px solid rgba(138,155,170,0.3);
+  padding: 6px 14px; border-radius: 2px;
+}
+
+.nh360-cs-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-weight: 300; line-height: 1.7;
+  color: rgba(246,244,241,0.5);
+  max-width: 480px;
+}

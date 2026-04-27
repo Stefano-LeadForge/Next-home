@@ -87,7 +87,7 @@ export default function StaticNav() {
         <div className="static-nav-right">
           <ul className="static-nav-links">
             <li>
-              <a href="/" className="static-nav-link">Next Home 360</a>
+              <a href="/next-home-360" className="static-nav-link">Next Home 360</a>
             </li>
 
             {/* Portfolio with dropdown */}
@@ -143,7 +143,7 @@ export default function StaticNav() {
         style={{ pointerEvents: 'none', opacity: 0 }}
       >
         <ul className="mobile-menu-list">
-          <li><a href="/" className="mobile-menu-link">Next Home 360</a></li>
+          <li><a href="/next-home-360" className="mobile-menu-link">Next Home 360</a></li>
           <li>
             <a href="/portfolio" className="mobile-menu-link">Portfolio</a>
             <div className="mobile-menu-sub">

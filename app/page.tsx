@@ -151,9 +151,7 @@ export default function HomePage() {
     }
 
     const ctaBtn  = document.getElementById('ctaScroll');
-    const navLink = document.getElementById('navNH360');
     ctaBtn?.addEventListener('click', scrollToFullscreen);
-    navLink?.addEventListener('click', scrollToFullscreen);
 
     /* ── MOBILE MENU ── */
     const hamburgerEl   = document.getElementById('hamburger');
@@ -191,22 +189,6 @@ export default function HomePage() {
     function onHamburgerClick() { menuOpen ? closeMenu() : openMenu(); }
     hamburgerEl?.addEventListener('click', onHamburgerClick);
 
-    /* NH360 mobile — close menu then scroll */
-    function onMobileNH360Click(e: Event) {
-      e.preventDefault();
-      closeMenu(() => {
-        const target = window.innerHeight * 1.2;
-        const lenis = lenisRef.current;
-        if (lenis) {
-          lenis.scrollTo(target, { duration: 3.6, easing: (x: number) => x });
-        } else {
-          gsap.to(window, { scrollTo: { y: target, autoKill: false }, duration: 3.6, ease: 'none' });
-        }
-      });
-    }
-    const mobileNH360 = document.getElementById('mobileNavNH360');
-    mobileNH360?.addEventListener('click', onMobileNH360Click);
-
     const cueTimer = setTimeout(() => { cue.classList.add('visible'); }, 1800);
 
     return () => {
@@ -215,9 +197,7 @@ export default function HomePage() {
       window.removeEventListener('scroll', onNavScroll);
       window.removeEventListener('resize', onResize);
       ctaBtn?.removeEventListener('click', scrollToFullscreen);
-      navLink?.removeEventListener('click', scrollToFullscreen);
       hamburgerEl?.removeEventListener('click', onHamburgerClick);
-      mobileNH360?.removeEventListener('click', onMobileNH360Click);
       document.body.style.overflow = '';
       clearTimeout(cueTimer);
     };
@@ -237,7 +217,7 @@ export default function HomePage() {
           </div>
         </div>
         <ul className="nav-links">
-          <li><a href="#" id="navNH360">Next Home 360</a></li>
+          <li><a href="/next-home-360" id="navNH360">Next Home 360</a></li>
           <li className="nav-has-dropdown">
             <span className="nav-dropdown-trigger">
               <a href="/portfolio">Portfolio</a>
@@ -262,7 +242,7 @@ export default function HomePage() {
       {/* ══ MOBILE MENU OVERLAY ══ */}
       <div className="mobile-menu" id="mobileMenu">
         <ul className="mobile-menu-list">
-          <li><a href="#" className="mobile-menu-link" id="mobileNavNH360">Next Home 360</a></li>
+          <li><a href="/next-home-360" className="mobile-menu-link" id="mobileNavNH360">Next Home 360</a></li>
           <li>
             <a href="/portfolio" className="mobile-menu-link">Portfolio</a>
             <div className="mobile-menu-sub">
@@ -323,7 +303,7 @@ export default function HomePage() {
             <span className="nh360-wall-sub">
               L&apos;unico servizio che massimizza il valore della tua casa
             </span>
-            <a href="#" className="nh360-wall-btn">
+            <a href="/next-home-360" className="nh360-wall-btn">
               <span>Scopri Next Home 360</span>
               <span className="arr" />
             </a>
