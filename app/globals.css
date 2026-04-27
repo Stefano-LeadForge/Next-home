@@ -235,7 +235,9 @@ nav.nav--solid {
 .hero-inner {
   position: absolute; inset: 0; z-index: 15;
   display: flex; flex-direction: column;
+  pointer-events: none; /* lets wall-text button shine through; interactive children opt back in */
 }
+.hero-cta-group, .hero-scroll-arrow { pointer-events: auto; }
 
 .hero-top {
   flex: 1; display: flex; align-items: center;
@@ -533,7 +535,7 @@ nav.nav--solid {
   /* Smaller title so it fits above the card */
   .hero-title {
     font-size: clamp(2rem, 8vw, 2.8rem);
-    line-height: 1.06;
+    line-height: 1.1;
     margin-bottom: 1.25rem;
   }
 
@@ -563,6 +565,11 @@ nav.nav--solid {
   .nh360-wall-btn   { margin-top: 1.75rem; padding: 11px 26px; font-size: 9.5px; }
 
   .post-expand { padding: 4rem 1.5rem; }
+}
+
+/* desktop: slightly looser leading so ascenders/descenders never touch */
+@media (min-width: 769px) {
+  .hero-title { line-height: 1.14; }
 }
 
 /* ══════════════════════════════════════
