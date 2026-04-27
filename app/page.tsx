@@ -154,6 +154,58 @@ export default function HomePage() {
     ctaBtn?.addEventListener('click', scrollToFullscreen);
     navLink?.addEventListener('click', scrollToFullscreen);
 
+    /* ── MOBILE MENU ── */
+    const hamburgerEl   = document.getElementById('hamburger');
+    const mobileMenuEl  = document.getElementById('mobileMenu');
+    const mobileLinks   = mobileMenuEl ? Array.from(mobileMenuEl.querySelectorAll('a')) : [];
+    let menuOpen        = false;
+
+    function openMenu() {
+      menuOpen = true;
+      hamburgerEl?.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      if (mobileMenuEl) mobileMenuEl.style.pointerEvents = 'auto';
+      gsap.to(mobileMenuEl, { opacity: 1, duration: 0.35, ease: 'power2.out' });
+      gsap.fromTo(
+        mobileLinks,
+        { opacity: 0, y: 32 },
+        { opacity: 1, y: 0, duration: 0.55, stagger: 0.1, ease: 'power3.out', delay: 0.18 }
+      );
+    }
+
+    function closeMenu(cb?: () => void) {
+      menuOpen = false;
+      hamburgerEl?.classList.remove('is-open');
+      document.body.style.overflow = '';
+      gsap.to(mobileLinks, { opacity: 0, y: 16, duration: 0.22, ease: 'power2.in', stagger: 0.04 });
+      gsap.to(mobileMenuEl, {
+        opacity: 0, duration: 0.28, delay: 0.18, ease: 'power2.in',
+        onComplete: () => {
+          if (mobileMenuEl) mobileMenuEl.style.pointerEvents = 'none';
+          cb?.();
+        },
+      });
+    }
+
+    function onHamburgerClick() { menuOpen ? closeMenu() : openMenu(); }
+    hamburgerEl?.addEventListener('click', onHamburgerClick);
+
+    /* NH360 mobile — close menu then scroll */
+    function onMobileNH360Click(e: Event) {
+      e.preventDefault();
+      closeMenu(() => {
+        const target = window.innerHeight * 1.2;
+        const lenis = lenisRef.current;
+        if (lenis) {
+          lenis.scrollTo(target, { duration: 3.6, easing: (x: number) => x });
+        } else {
+          gsap.to(window, { scrollTo: { y: target, autoKill: false }, duration: 3.6, ease: 'none' });
+        }
+      });
+    }
+    const mobileNH360 = document.getElementById('mobileNavNH360');
+    mobileNH360?.addEventListener('click', onMobileNH360Click);
+
     const cueTimer = setTimeout(() => { cue.classList.add('visible'); }, 1800);
 
     return () => {
@@ -163,6 +215,9 @@ export default function HomePage() {
       window.removeEventListener('resize', onResize);
       ctaBtn?.removeEventListener('click', scrollToFullscreen);
       navLink?.removeEventListener('click', scrollToFullscreen);
+      hamburgerEl?.removeEventListener('click', onHamburgerClick);
+      mobileNH360?.removeEventListener('click', onMobileNH360Click);
+      document.body.style.overflow = '';
       clearTimeout(cueTimer);
     };
   }, []);
@@ -186,7 +241,23 @@ export default function HomePage() {
           <li><a href="#">Chi siamo</a></li>
         </ul>
         <a href="#" className="nav-btn">Valuta la tua casa</a>
+        <button className="hamburger" id="hamburger" aria-label="Apri menu">
+          <span className="hamburger-line" />
+          <span className="hamburger-line" />
+          <span className="hamburger-line" />
+        </button>
       </nav>
+
+      {/* ══ MOBILE MENU OVERLAY ══ */}
+      <div className="mobile-menu" id="mobileMenu">
+        <ul className="mobile-menu-list">
+          <li><a href="#" className="mobile-menu-link" id="mobileNavNH360">Next Home 360</a></li>
+          <li><a href="#" className="mobile-menu-link">Portfolio</a></li>
+          <li><a href="#" className="mobile-menu-link">Chi siamo</a></li>
+        </ul>
+        <div className="mobile-menu-divider" />
+        <a href="#" className="mobile-menu-cta-link">Valuta la tua casa</a>
+      </div>
 
       {/* ══ STICKY HERO ══ */}
       <div className="hero-sticky-wrap" id="heroWrap">
