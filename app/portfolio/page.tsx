@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import PortfolioContent from './PortfolioContent';
 
 export const metadata: Metadata = {
   title: 'Portfolio — NextHome Real Estate',
@@ -6,18 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function PortfolioPage() {
-  return (
-    <main className="portfolio-page">
-      <div className="inner-hero">
-        <div className="inner-hero-eyebrow">
-          <div className="inner-hero-eyebrow-line" />
-          <span className="inner-hero-eyebrow-text">Le nostre proprietà</span>
-        </div>
-        <h1 className="inner-hero-title">Portfolio</h1>
-        <p className="inner-hero-subtitle">
-          Stiamo aggiornando il nostro catalogo. Torna presto per scoprire le nuove proprietà selezionate.
-        </p>
-      </div>
-    </main>
-  );
+  return <PortfolioContent />;
 }
