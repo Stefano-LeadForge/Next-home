@@ -47,7 +47,8 @@ export default function NextHome360Page() {
           <span>Il nostro servizio esclusivo</span>
         </div>
         <h1 className="inner-hero-title">
-          Next Home 360: vendi il tuo immobile mentre genera reddito con gli affitti brevi
+          Next Home 360: 
+          vendi il tuo immobile mentre genera reddito con gli affitti brevi
         </h1>
         <p className="inner-hero-subtitle">
           Next Home 360 è il servizio esclusivo di Next Home pensato per i proprietari

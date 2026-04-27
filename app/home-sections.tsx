@@ -9,6 +9,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const ARTICLES = [
   {
     id: 1,
+    href: '/blog/mercato-immobiliare-milano-2026',
     src: '/copertina-articolo-mercato.png',
     alt: 'Mercato Immobiliare Milano',
     category: 'Mercato',
@@ -20,6 +21,7 @@ const ARTICLES = [
   },
   {
     id: 2,
+    href: '/blog',
     src: '/copertina-articolo-bnb.png',
     alt: 'Affitti Brevi Milano',
     category: 'Affitti Brevi',
@@ -31,6 +33,7 @@ const ARTICLES = [
   },
   {
     id: 3,
+    href: '/blog',
     src: '/copertina-articolo-valutazione.png',
     alt: 'Valutazione Immobiliare',
     category: 'Guida',
@@ -143,7 +146,7 @@ export default function HomeSections() {
             {ARTICLES.map((article) => (
               <motion.a
                 key={article.id}
-                href="/blog"
+                href={article.href}
                 className="blog-card"
                 initial={{ opacity: 0, y: 32 }}
                 whileInView={{ opacity: 1, y: 0 }}
