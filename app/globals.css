@@ -1573,6 +1573,14 @@ nav.nav--solid {
 ══════════════════════════════════════ */
 .nav-has-dropdown { position: relative; }
 
+/* transparent bridge below trigger — prevents dropdown from closing while crossing the gap */
+.nav-has-dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%; left: -8px; right: -8px;
+  height: 16px; /* matches the 14px gap in top: calc(100% + 14px) */
+}
+
 .nav-dropdown-trigger {
   display: inline-flex; align-items: center; gap: 5px; cursor: pointer;
 }
@@ -1664,6 +1672,29 @@ nav.nav--solid {
 
 @media (max-width: 900px) { .static-nav-right { display: none; } }
 
+/* ── STATIC HAMBURGER (mobile only) ── */
+.static-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background: none; border: none; cursor: pointer;
+  padding: 4px; margin-right: -4px;
+}
+@media (max-width: 900px) { .static-hamburger { display: flex; } }
+
+/* ── STATIC MOBILE MENU OVERLAY ── */
+.static-mobile-menu {
+  position: fixed; inset: 0;
+  z-index: 200;
+  background: #0B1D26;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ══════════════════════════════════════
    MOBILE MENU SUB-LINKS (Portfolio)
 ══════════════════════════════════════ */
@@ -1673,7 +1704,7 @@ nav.nav--solid {
 }
 .mobile-menu-sub-link {
   font-family: 'Cormorant Garamond', serif;
-  font-weight: 300; font-size: clamp(1rem, 3.5vw, 1.4rem);
+  font-weight: 300; font-size: clamp(1.25rem, 4.5vw, 1.7rem);
   letter-spacing: 0.06em; color: rgba(246,244,241,0.4);
   text-decoration: none; transition: color 200ms ease;
 }
