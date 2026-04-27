@@ -279,9 +279,8 @@ export default function HomePage() {
                 <em>futuro ideale.</em>
               </h1>
               <div className="hero-cta-group" id="ctas">
-                <a href="#" className="cta-primary" id="ctaScroll">
-                  <span>Scopri Next Home 360</span>
-                  <span className="arr" />
+                <a href="#" className="hero-scroll-arrow" id="ctaScroll" aria-label="Scopri Next Home 360">
+                  <span className="hero-scroll-arrow-icon" />
                 </a>
               </div>
             </div>

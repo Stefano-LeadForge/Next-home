@@ -313,6 +313,36 @@ nav.nav--solid {
 }
 .cta-primary:hover .arr { width: 24px; }
 
+/* ── HERO SCROLL ARROW ── */
+.hero-scroll-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px; height: 52px;
+  border: 1px solid rgba(246,244,241,0.28);
+  border-radius: 50%;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: border-color 300ms ease, background 300ms ease;
+  animation: heroArrowFloat 2.2s ease-in-out infinite;
+}
+.hero-scroll-arrow:hover {
+  border-color: rgba(246,244,241,0.65);
+  background: rgba(246,244,241,0.06);
+  animation-play-state: paused;
+}
+.hero-scroll-arrow-icon {
+  display: block;
+  width: 10px; height: 10px;
+  border-right: 1.5px solid var(--white);
+  border-bottom: 1.5px solid var(--white);
+  transform: rotate(45deg) translate(-1px, -2px);
+}
+@keyframes heroArrowFloat {
+  0%, 100% { transform: translateY(0);   opacity: 0.7; }
+  50%       { transform: translateY(6px); opacity: 1;   }
+}
+
 .cta-ghost {
   font-size: 10.5px; font-weight: 400; letter-spacing: 0.18em;
   text-transform: uppercase; text-decoration: none;
@@ -657,6 +687,38 @@ nav.nav--solid {
   font-size: clamp(2.8rem, 5vw, 4.5rem);
   line-height: 1.02; letter-spacing: -0.025em;
   color: var(--navy-deep);
+}
+
+/* ── SECTION SCROLL ARROW (portfolio → next) ── */
+.portfolio-arrow-wrap {
+  display: flex;
+  justify-content: center;
+  padding-top: 3.5rem;
+}
+.section-scroll-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--navy-deep);
+  border: none;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(8,22,31,0.22);
+  transition: background 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+}
+.section-scroll-arrow:hover {
+  background: var(--navy-mid);
+  transform: translateY(4px);
+  box-shadow: 0 10px 32px rgba(8,22,31,0.32);
+}
+.section-scroll-arrow-icon {
+  display: block;
+  width: 10px; height: 10px;
+  border-right: 1.5px solid var(--white);
+  border-bottom: 1.5px solid var(--white);
+  transform: rotate(45deg) translate(-1px, -2px);
 }
 
 .portfolio-grid {

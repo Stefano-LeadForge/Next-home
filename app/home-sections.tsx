@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useLenis } from '@/components/SmoothScrolling';
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -42,6 +43,15 @@ const ARTICLES = [
 ];
 
 export default function HomeSections() {
+  const lenis = useLenis();
+
+  function scrollToNext() {
+    lenis?.scrollTo('#blogSection', {
+      duration: 1.4,
+      easing: (t: number) => 1 - Math.pow(1 - t, 3),
+    });
+  }
+
   return (
     <>
       {/* ══ HERO EXIT ZONE — 120vh scroll space while hero stays pinned ══ */}
@@ -98,6 +108,12 @@ export default function HomeSections() {
               </div>
             </motion.a>
           ))}
+        </div>
+
+        <div className="portfolio-arrow-wrap">
+          <button className="section-scroll-arrow" onClick={scrollToNext} aria-label="Vai alla sezione Blog">
+            <span className="section-scroll-arrow-icon" />
+          </button>
         </div>
       </section>
 
