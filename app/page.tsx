@@ -65,10 +65,12 @@ export default function HomePage() {
 
     const mm = gsap.matchMedia();
 
-    // cardFrom: the CSS resting state of the card at scroll=0.
-    // Using fromTo() (not to()) guarantees the "at-top" state is explicit and
-    // never captured mid-entrance-animation, which fixes the re-entry bug.
-    function buildExpandTl(scrub: number, wallDelay: number, cardFrom: gsap.TweenVars) {
+    // Card uses .to() so GSAP reads the CSS resting position directly — no risk
+    // of conflicting with percent-based transforms (xPercent) that fromTo() can
+    // mis-read as pixel offsets when combined with the to-state's x:0/y:0.
+    // Text/overlay elements use .fromTo() to lock the at-top from-state explicitly,
+    // which fixes the re-entry bug (scrub reverse always restores opacity:1).
+    function buildExpandTl(scrub: number, wallDelay: number) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: document.body,
@@ -83,12 +85,15 @@ export default function HomePage() {
       });
 
       tl
-        /* card expands to fullscreen */
-        .fromTo(card,
-          cardFrom,
-          { width: '100%', height: '100%', top: 0, left: 0, xPercent: 0, yPercent: 0, x: 0, y: 0, borderRadius: 0, ease: 'power2.inOut', duration: 0.6, force3D: true },
-          0
-        )
+        /* card expands to fullscreen — .to() reads CSS state safely */
+        .to(card, {
+          width: '100%', height: '100%',
+          top: 0, left: 0,
+          xPercent: 0, yPercent: 0,
+          x: 0, y: 0,
+          borderRadius: 0,
+          ease: 'power2.inOut', duration: 0.6, force3D: true,
+        }, 0)
         /* dissolve UI — explicit from so reverse always restores to opacity:1 */
         .fromTo('#eyebrow',   { opacity: 1, y: 0 }, { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in', force3D: true }, 0)
         .fromTo('#title',     { opacity: 1, y: 0 }, { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in', force3D: true }, 0.04)
@@ -104,13 +109,7 @@ export default function HomePage() {
 
     /* desktop: lower scrub matches Lenis lerp timing → consistent feel page-wide */
     mm.add('(min-width: 769px)', () => {
-      const desktopCardFrom: gsap.TweenVars = {
-        width: '320px', height: '420px',
-        top: '50%', left: '50%',
-        xPercent: -50, yPercent: -50,
-        borderRadius: '4px',
-      };
-      const cleanupExpand = buildExpandTl(0.5, 0.62, desktopCardFrom);
+      const cleanupExpand = buildExpandTl(0.5, 0.62);
       const exitTween = gsap.to('#heroWrap', {
         y: () => -window.innerHeight * 0.45,
         opacity: 0,
@@ -127,13 +126,7 @@ export default function HomePage() {
     });
     /* mobile: keep original scrub values — mobile feel is already correct */
     mm.add('(max-width: 768px)', () => {
-      const mobileCardFrom: gsap.TweenVars = {
-        width: '82vw', height: '40vh',
-        top: '52vh', left: '50%',
-        xPercent: -50, yPercent: 0,
-        borderRadius: '4px',
-      };
-      const cleanupExpand = buildExpandTl(1.5, 0.75, mobileCardFrom);
+      const cleanupExpand = buildExpandTl(1.5, 0.75);
       const exitTween = gsap.to('#heroWrap', {
         y: () => -window.innerHeight * 0.45,
         opacity: 0,
