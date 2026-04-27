@@ -47,7 +47,7 @@ export default function NextHome360Page() {
           <span>Il nostro servizio esclusivo</span>
         </div>
         <h1 className="inner-hero-title">
-          Next Home 360: 
+          Next Home 360: <br />
           vendi il tuo immobile mentre genera reddito con gli affitti brevi
         </h1>
         <p className="inner-hero-subtitle">
