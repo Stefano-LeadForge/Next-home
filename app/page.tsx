@@ -30,16 +30,29 @@ export default function HomePage() {
       return;
     }
 
-    /* ── ENTRANCE TIMELINE ── */
-    const enter = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    enter
-      .to('#nav',       { opacity: 1, y: 0, duration: 0.9 })
-      .to('#eyebrow',   { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
-      .to('#title',     { opacity: 1, y: 0, duration: 1.0 }, '-=0.5')
-      .to('#ctas',      { opacity: 1, y: 0, duration: 0.7 }, '-=0.5')
-      .to('#mediaCard', { opacity: 1, duration: 0.6 }, '-=0.3')
-      .to('#scrollCue', { opacity: 1, duration: 0.5 }, '-=0.1');
-    enter.add(() => { cue.classList.add('visible'); }, '+=0.3');
+    /* ── ENTRANCE or IMMEDIATE SET depending on initial scroll ── */
+    const isScrolled = window.scrollY > 0;
+
+    if (isScrolled) {
+      // Page loaded already scrolled (refresh mid-page): apply post-entrance
+      // state instantly so ScrollTrigger's scrub has clean from-values.
+      gsap.set('#nav',       { opacity: 1, y: 0 });
+      gsap.set('#eyebrow',   { opacity: 1, y: 0 });
+      gsap.set('#title',     { opacity: 1, y: 0 });
+      gsap.set('#ctas',      { opacity: 1, y: 0 });
+      gsap.set('#mediaCard', { opacity: 1 });
+      cue.classList.add('visible');
+    } else {
+      const enter = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      enter
+        .to('#nav',       { opacity: 1, y: 0, duration: 0.9 })
+        .to('#eyebrow',   { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
+        .to('#title',     { opacity: 1, y: 0, duration: 1.0 }, '-=0.5')
+        .to('#ctas',      { opacity: 1, y: 0, duration: 0.7 }, '-=0.5')
+        .to('#mediaCard', { opacity: 1, duration: 0.6 }, '-=0.3')
+        .to('#scrollCue', { opacity: 1, duration: 0.5 }, '-=0.1');
+      enter.add(() => { cue.classList.add('visible'); }, '+=0.3');
+    }
 
     /* ═══════════════════════════════════════════════════
        SCROLL MEDIA EXPANSION — responsive via matchMedia
@@ -52,7 +65,10 @@ export default function HomePage() {
 
     const mm = gsap.matchMedia();
 
-    function buildExpandTl(scrub: number, wallDelay: number) {
+    // cardFrom: the CSS resting state of the card at scroll=0.
+    // Using fromTo() (not to()) guarantees the "at-top" state is explicit and
+    // never captured mid-entrance-animation, which fixes the re-entry bug.
+    function buildExpandTl(scrub: number, wallDelay: number, cardFrom: gsap.TweenVars) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: document.body,
@@ -68,32 +84,33 @@ export default function HomePage() {
 
       tl
         /* card expands to fullscreen */
-        .to(card, {
-          width: '100%', height: '100%',
-          top: 0, left: 0,
-          xPercent: 0, yPercent: 0,
-          x: 0, y: 0,
-          borderRadius: 0,
-          ease: 'power2.inOut',
-          duration: 0.6,
-          force3D: true,
-        }, 0)
-        /* dissolve UI */
-        .to('#eyebrow',  { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in', force3D: true }, 0)
-        .to('#title',    { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in', force3D: true }, 0.04)
-        .to('#ctas',     { opacity: 0, y: -12, duration: 0.28, ease: 'power2.in', force3D: true }, 0.12)
-        .to('#scrollCue',{ opacity: 0, duration: 0.2,  ease: 'power2.in' }, 0)
+        .fromTo(card,
+          cardFrom,
+          { width: '100%', height: '100%', top: 0, left: 0, xPercent: 0, yPercent: 0, x: 0, y: 0, borderRadius: 0, ease: 'power2.inOut', duration: 0.6, force3D: true },
+          0
+        )
+        /* dissolve UI — explicit from so reverse always restores to opacity:1 */
+        .fromTo('#eyebrow',   { opacity: 1, y: 0 }, { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in', force3D: true }, 0)
+        .fromTo('#title',     { opacity: 1, y: 0 }, { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in', force3D: true }, 0.04)
+        .fromTo('#ctas',      { opacity: 1, y: 0 }, { opacity: 0, y: -12, duration: 0.28, ease: 'power2.in', force3D: true }, 0.12)
+        .fromTo('#scrollCue', { opacity: 1 },        { opacity: 0, duration: 0.2, ease: 'power2.in' }, 0)
         /* overlay settles */
-        .to(imgOverlay,  { opacity: 1, duration: 0.2, ease: 'power1.out' }, 0.6)
+        .fromTo(imgOverlay,   { opacity: 0 },        { opacity: 1, duration: 0.2, ease: 'power1.out' }, 0.6)
         /* wall text once fully fullscreen */
-        .to(wallText,    { opacity: 1, duration: 0.3, ease: 'power2.out' }, wallDelay);
+        .fromTo(wallText,     { opacity: 0 },        { opacity: 1, duration: 0.3, ease: 'power2.out' }, wallDelay);
 
       return () => tl.kill();
     }
 
     /* desktop: lower scrub matches Lenis lerp timing → consistent feel page-wide */
     mm.add('(min-width: 769px)', () => {
-      const cleanupExpand = buildExpandTl(0.5, 0.62);
+      const desktopCardFrom: gsap.TweenVars = {
+        width: '320px', height: '420px',
+        top: '50%', left: '50%',
+        xPercent: -50, yPercent: -50,
+        borderRadius: '4px',
+      };
+      const cleanupExpand = buildExpandTl(0.5, 0.62, desktopCardFrom);
       const exitTween = gsap.to('#heroWrap', {
         y: () => -window.innerHeight * 0.45,
         opacity: 0,
@@ -110,7 +127,13 @@ export default function HomePage() {
     });
     /* mobile: keep original scrub values — mobile feel is already correct */
     mm.add('(max-width: 768px)', () => {
-      const cleanupExpand = buildExpandTl(1.5, 0.75);
+      const mobileCardFrom: gsap.TweenVars = {
+        width: '82vw', height: '40vh',
+        top: '52vh', left: '50%',
+        xPercent: -50, yPercent: 0,
+        borderRadius: '4px',
+      };
+      const cleanupExpand = buildExpandTl(1.5, 0.75, mobileCardFrom);
       const exitTween = gsap.to('#heroWrap', {
         y: () => -window.innerHeight * 0.45,
         opacity: 0,
