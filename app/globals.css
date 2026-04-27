@@ -1730,27 +1730,228 @@ nav.nav--solid {
 }
 
 /* ══════════════════════════════════════
-   NEXT HOME 360 PAGE
+   NEXT HOME 360 SERVICE PAGE
 ══════════════════════════════════════ */
 .nh360-page { min-height: 100vh; }
 
-.nh360-cs-block {
-  margin-top: 3rem;
-  display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;
+/* ── content wrapper ── */
+.nh360-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 3.5rem 7rem;
 }
 
-.nh360-cs-label {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 10px; font-weight: 400; letter-spacing: 0.3em;
-  text-transform: uppercase; color: var(--silver);
-  border: 1px solid rgba(138,155,170,0.3);
-  padding: 6px 14px; border-radius: 2px;
-}
+/* ── sections ── */
+.nh360-intro { margin-bottom: 0.5rem; }
+.nh360-section { margin-top: 4.5rem; }
 
-.nh360-cs-text {
+/* ── intro lead ── */
+.nh360-lead {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-  font-weight: 300; line-height: 1.7;
-  color: rgba(246,244,241,0.5);
-  max-width: 480px;
+  font-weight: 300;
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  line-height: 1.72;
+  color: rgba(246,244,241,0.78);
+  margin-bottom: 1.75rem;
+}
+.nh360-lead strong { font-weight: 400; color: rgba(246,244,241,0.95); }
+
+/* ── blockquote callout ── */
+.nh360-double-box {
+  border-left: 2px solid rgba(194,205,214,0.25);
+  padding: 0.25rem 0 0.25rem 1.75rem;
+  margin: 2rem 0 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  line-height: 1.72;
+  color: rgba(246,244,241,0.62);
+}
+.nh360-double-box strong { font-weight: 400; font-style: normal; color: rgba(246,244,241,0.88); }
+
+/* ── body text ── */
+.nh360-body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(246,244,241,0.62);
+  margin-bottom: 1.25rem;
+}
+.nh360-body strong { font-weight: 500; color: rgba(246,244,241,0.88); }
+
+/* ── section headings ── */
+.nh360-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+
+/* ── statement (emphasis line) ── */
+.nh360-statement {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  line-height: 1.65;
+  color: rgba(246,244,241,0.55);
+  margin-top: 1.75rem;
+}
+
+/* ── bullet list ── */
+.nh360-list {
+  list-style: none;
+  padding: 0; margin: 1.25rem 0 0;
+  display: flex; flex-direction: column; gap: 0.7rem;
+}
+.nh360-list-item {
+  display: flex; align-items: flex-start; gap: 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14.5px; font-weight: 300; line-height: 1.7;
+  color: rgba(246,244,241,0.62);
+}
+.nh360-list-bullet {
+  flex-shrink: 0;
+  width: 14px; height: 1px;
+  background: var(--silver); opacity: 0.5;
+  margin-top: 0.68em;
+}
+
+/* ── numbered advantages ── */
+.nh360-advantages {
+  display: flex; flex-direction: column; gap: 2.75rem;
+  margin-top: 1.75rem;
+}
+.nh360-advantage {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 0 1.75rem;
+  align-items: start;
+}
+.nh360-advantage-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: rgba(194,205,214,0.15);
+  padding-top: 0.1em;
+  user-select: none;
+}
+.nh360-advantage-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(1.15rem, 2.1vw, 1.4rem);
+  line-height: 1.25;
+  color: var(--white);
+  margin-bottom: 0.65rem;
+}
+.nh360-advantage-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 300; line-height: 1.85;
+  color: rgba(246,244,241,0.58);
+}
+
+/* ── conclusion ── */
+.nh360-conclusion-label {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px; font-weight: 400; letter-spacing: 0.32em;
+  text-transform: uppercase; color: var(--silver);
+  margin-bottom: 1.25rem;
+}
+.nh360-hr {
+  border: none;
+  border-top: 1px solid rgba(194,205,214,0.08);
+  margin: 0 0 2.5rem;
+}
+.nh360-closer {
+  margin-top: 1.75rem;
+  display: flex; flex-direction: column; gap: 0.1rem;
+}
+.nh360-closer p {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(1.05rem, 1.9vw, 1.3rem);
+  line-height: 1.6;
+  color: rgba(246,244,241,0.72);
+}
+.nh360-closer p:last-child {
+  color: var(--white);
+  font-weight: 400;
+}
+
+/* ── CTA block ── */
+.nh360-cta-section {
+  margin-top: 5rem;
+  padding: 3.5rem 3rem;
+  border: 1px solid rgba(194,205,214,0.1);
+  border-radius: 4px;
+  background: rgba(255,255,255,0.018);
+  text-align: center;
+}
+.nh360-cta-eyebrow {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px; font-weight: 400; letter-spacing: 0.32em;
+  text-transform: uppercase; color: var(--silver);
+  margin-bottom: 1.1rem;
+}
+.nh360-cta-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(1.55rem, 3vw, 2.25rem);
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.nh360-cta-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 300; line-height: 1.8;
+  color: rgba(246,244,241,0.52);
+  max-width: 460px; margin: 0 auto 2.25rem;
+}
+.nh360-cta-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 400; letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--navy-deep); background: var(--white);
+  text-decoration: none;
+  padding: 16px 38px; border-radius: 2px;
+  transition: background 250ms ease, transform 200ms ease;
+  position: relative; overflow: hidden;
+}
+.nh360-cta-btn:hover { background: var(--silver-light); transform: translateY(-2px); }
+.nh360-cta-btn .arr {
+  width: 16px; height: 1px; background: var(--navy-deep);
+  display: inline-block;
+  transition: width 250ms ease;
+}
+.nh360-cta-btn .arr::after {
+  content: ''; position: absolute; right: 38px; top: calc(50% - 3px);
+  width: 6px; height: 6px;
+  border-right: 1px solid var(--navy-deep);
+  border-top: 1px solid var(--navy-deep);
+  transform: rotate(45deg);
+}
+.nh360-cta-btn:hover .arr { width: 24px; }
+.nh360-cta-micro {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 300; letter-spacing: 0.1em;
+  color: rgba(194,205,214,0.35);
+  margin-top: 1.25rem;
+}
+
+/* ── responsive ── */
+@media (max-width: 768px) {
+  .nh360-content { padding: 0 1.5rem 5rem; }
+  .nh360-section { margin-top: 3.25rem; }
+  .nh360-advantage { grid-template-columns: 38px 1fr; gap: 0 1rem; }
+  .nh360-advantage-num { font-size: 1.7rem; }
+  .nh360-cta-section { padding: 2.5rem 1.5rem; }
 }
