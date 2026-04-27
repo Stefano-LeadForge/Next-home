@@ -1841,59 +1841,11 @@ nav.nav--solid {
 ══════════════════════════════════════ */
 .nh360-page { min-height: 100vh; }
 
-/* ── cover image ── */
-.nh360-cover {
-  position: relative;
-  width: 100%; height: 72vh; min-height: 480px;
-  overflow: hidden;
-}
-.nh360-cover-gradient {
-  position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(
-    to bottom,
-    rgba(8,22,31,0.18) 0%,
-    rgba(8,22,31,0.42) 45%,
-    rgba(8,22,31,0.86) 100%
-  );
-}
-.nh360-cover-content {
-  position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
-  padding: 0 3.5rem 3.5rem;
-  max-width: 900px;
-}
-.nh360-cover-eyebrow {
-  display: flex; align-items: center; gap: 12px;
-  font-size: 10px; font-weight: 400; letter-spacing: 0.32em;
-  text-transform: uppercase; color: var(--silver);
-  margin-bottom: 1.25rem;
-}
-.nh360-cover-eyebrow-line {
-  width: 24px; height: 1px; background: var(--silver); flex-shrink: 0;
-}
-.nh360-cover-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  font-size: clamp(2.2rem, 4.5vw, 4.2rem);
-  line-height: 1.08; letter-spacing: -0.02em;
-  color: var(--white);
-  margin-bottom: 1.2rem;
-  text-shadow:
-    0 2px 28px rgba(8,22,31,0.85),
-    0 0 80px rgba(8,22,31,0.5);
-}
-.nh360-cover-subtitle {
-  font-size: clamp(13px, 1.35vw, 15px);
-  font-weight: 300; line-height: 1.82;
-  color: rgba(246,244,241,0.78);
-  max-width: 560px; letter-spacing: 0.02em;
-  text-shadow: 0 1px 16px rgba(8,22,31,0.7);
-}
-
 /* ── content wrapper ── */
 .nh360-content {
   max-width: 800px;
   margin: 0 auto;
-  padding: 3.5rem 3.5rem 7rem;
+  padding: 0 3.5rem 7rem;
 }
 
 /* ── sections ── */
@@ -2104,10 +2056,7 @@ nav.nav--solid {
 
 /* ── responsive ── */
 @media (max-width: 768px) {
-  .nh360-cover { height: 58vh; min-height: 340px; }
-  .nh360-cover-content { padding: 0 1.5rem 2.5rem; }
-  .nh360-cover-title { font-size: clamp(1.85rem, 7.5vw, 2.6rem); }
-  .nh360-content { padding: 2.5rem 1.5rem 5rem; }
+  .nh360-content { padding: 0 1.5rem 5rem; }
   .nh360-section { margin-top: 3.25rem; }
   .nh360-advantage { grid-template-columns: 38px 1fr; gap: 0 1rem; }
   .nh360-advantage-num { font-size: 1.7rem; }

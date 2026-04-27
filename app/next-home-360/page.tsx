@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import gsap from 'gsap';
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -30,9 +29,10 @@ export default function NextHome360Page() {
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
     tl
-      .from('.nh360-cover',         { opacity: 0, duration: 0.7 })
-      .from('.nh360-cover-content', { opacity: 0, y: 24, duration: 0.9 }, '-=0.25')
-      .from('.nh360-content',       { opacity: 0, y: 28, duration: 1.0 }, '-=0.55');
+      .from('.inner-hero-eyebrow',  { opacity: 0, y: 16, duration: 0.7 })
+      .from('.inner-hero-title',    { opacity: 0, y: 24, duration: 0.9 }, '-=0.45')
+      .from('.inner-hero-subtitle', { opacity: 0, y: 16, duration: 0.8 }, '-=0.55')
+      .from('.nh360-content',       { opacity: 0, y: 22, duration: 0.8 }, '-=0.4');
 
     return () => { tl.kill(); };
   }, []);
@@ -40,31 +40,20 @@ export default function NextHome360Page() {
   return (
     <main className="nh360-page">
 
-      {/* ── COVER ── */}
-      <div className="nh360-cover">
-        <Image
-          src="/copertina-next-home-360.png"
-          alt="Next Home 360 — il servizio esclusivo"
-          fill
-          priority
-          sizes="100vw"
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
-        />
-        <div className="nh360-cover-gradient" />
-        <div className="nh360-cover-content">
-          <div className="nh360-cover-eyebrow">
-            <div className="nh360-cover-eyebrow-line" />
-            <span>Il nostro servizio esclusivo</span>
-          </div>
-          <h1 className="nh360-cover-title">
-            Next Home 360: <br />
-            vendi il tuo immobile mentre genera reddito con gli affitti brevi
-          </h1>
-          <p className="nh360-cover-subtitle">
-            Next Home 360 è il servizio esclusivo di Next Home pensato per i proprietari
-            che vogliono vendere casa a Milano senza lasciare l&apos;immobile fermo.
-          </p>
+      {/* ── HERO ── */}
+      <div className="inner-hero">
+        <div className="inner-hero-eyebrow">
+          <div className="inner-hero-eyebrow-line" />
+          <span>Il nostro servizio esclusivo</span>
         </div>
+        <h1 className="inner-hero-title">
+          Next Home 360: <br />
+          vendi il tuo immobile mentre genera reddito con gli affitti brevi
+        </h1>
+        <p className="inner-hero-subtitle">
+          Next Home 360 è il servizio esclusivo di Next Home pensato per i proprietari
+          che vogliono vendere casa a Milano senza lasciare l&apos;immobile fermo.
+        </p>
       </div>
 
       {/* ── BODY ── */}
