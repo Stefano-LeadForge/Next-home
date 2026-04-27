@@ -65,11 +65,22 @@ body::before {
 
 /* ── NAV ── */
 nav {
-  position: absolute; top: 0; left: 0; right: 0;
-  z-index: 50;
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 2rem 3.5rem;
   opacity: 0; transform: translateY(-12px);
+  /* background/blur transitions — GSAP handles opacity/transform separately */
+  transition: background 350ms ease, backdrop-filter 350ms ease,
+              border-color 350ms ease, box-shadow 350ms ease;
+}
+
+nav.nav--solid {
+  background: rgba(8, 22, 31, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(194, 205, 214, 0.08);
+  box-shadow: 0 2px 28px rgba(0, 0, 0, 0.22);
 }
 
 .logo-wrap {

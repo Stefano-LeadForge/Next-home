@@ -107,7 +107,14 @@ export default function HomePage() {
           invalidateOnRefresh: true,
         },
       });
-      return () => { cleanupExpand(); exitTween.kill(); };
+      /* restore nav links once portfolio takes over (expansion faded them out) */
+      const navLinks = ScrollTrigger.create({
+        trigger: '#nextSection',
+        start: 'top 70%',
+        onEnter:     () => gsap.to(['.nav-links', '.nav-btn'], { opacity: 1, duration: 0.4, ease: 'power2.out', overwrite: true }),
+        onLeaveBack: () => gsap.to(['.nav-links', '.nav-btn'], { opacity: 0, duration: 0.25, ease: 'power2.in',  overwrite: true }),
+      });
+      return () => { cleanupExpand(); exitTween.kill(); navLinks.kill(); };
     });
     /* mobile: keep original scrub values — mobile feel is already correct */
     mm.add('(max-width: 768px)', () => {
@@ -126,6 +133,14 @@ export default function HomePage() {
       });
       return () => { cleanupExpand(); exitTween.kill(); };
     });
+
+    /* ── NAV SOLID BACKGROUND after 50px scroll ── */
+    const navEl = document.getElementById('nav');
+    function onNavScroll() {
+      navEl?.classList.toggle('nav--solid', window.scrollY > 50);
+    }
+    window.addEventListener('scroll', onNavScroll, { passive: true });
+    onNavScroll(); // apply immediately if page loads already scrolled
 
     /* ── RECALC on resize ── */
     const onResize = () => ScrollTrigger.refresh();
@@ -153,6 +168,7 @@ export default function HomePage() {
     return () => {
       mm.kill();
       ScrollTrigger.getAll().forEach((t) => t.kill());
+      window.removeEventListener('scroll', onNavScroll);
       window.removeEventListener('resize', onResize);
       ctaBtn?.removeEventListener('click', scrollToFullscreen);
       navLink?.removeEventListener('click', scrollToFullscreen);
@@ -162,29 +178,29 @@ export default function HomePage() {
 
   return (
     <>
+      {/* ══ FIXED NAV — outside heroWrap so position:fixed works correctly ══ */}
+      <nav id="nav">
+        <div className="logo-wrap">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="logo-icon" src="/logo.png" alt="NextHome logo" />
+          <div className="logo-divider" />
+          <div className="logo-text">
+            <span className="logo-main">NextHome</span>
+            <span className="logo-sub">Real Estate</span>
+          </div>
+        </div>
+        <ul className="nav-links">
+          <li><a href="#" id="navNH360">Next Home 360</a></li>
+          <li><a href="#">Portfolio</a></li>
+          <li><a href="#">Chi siamo</a></li>
+        </ul>
+        <a href="#" className="nav-btn">Valuta la tua casa</a>
+      </nav>
+
       {/* ══ STICKY HERO ══ */}
       <div className="hero-sticky-wrap" id="heroWrap">
 
         <div className="hero-bg" />
-
-        {/* NAV */}
-        <nav id="nav">
-          <div className="logo-wrap">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="logo-icon" src="/logo.png" alt="NextHome logo" />
-            <div className="logo-divider" />
-            <div className="logo-text">
-              <span className="logo-main">NextHome</span>
-              <span className="logo-sub">Real Estate</span>
-            </div>
-          </div>
-          <ul className="nav-links">
-            <li><a href="#" id="navNH360">Next Home 360</a></li>
-            <li><a href="#">Portfolio</a></li>
-            <li><a href="#">Chi siamo</a></li>
-          </ul>
-          <a href="#" className="nav-btn">Valuta la tua casa</a>
-        </nav>
 
         {/* HERO TEXT */}
         <div className="hero-inner">
