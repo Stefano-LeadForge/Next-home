@@ -223,7 +223,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <>
+    <div className="home-page">
       {/* ══ FIXED NAV — outside heroWrap so position:fixed works correctly ══ */}
       <nav id="nav">
         <div className="logo-wrap">
@@ -237,10 +237,10 @@ export default function HomePage() {
         </div>
         <ul className="nav-links">
           <li><a href="#" id="navNH360">Next Home 360</a></li>
-          <li><a href="#">Portfolio</a></li>
-          <li><a href="#">Blog</a></li>
+          <li><a href="/portfolio">Portfolio</a></li>
+          <li><a href="/blog">Blog</a></li>
         </ul>
-        <a href="#" className="nav-btn">Valuta la tua casa</a>
+        <a href="/valuta-casa" className="nav-btn">Valuta la tua casa</a>
         <button className="hamburger" id="hamburger" aria-label="Apri menu">
           <span className="hamburger-line" />
           <span className="hamburger-line" />
@@ -252,11 +252,11 @@ export default function HomePage() {
       <div className="mobile-menu" id="mobileMenu">
         <ul className="mobile-menu-list">
           <li><a href="#" className="mobile-menu-link" id="mobileNavNH360">Next Home 360</a></li>
-          <li><a href="#" className="mobile-menu-link">Portfolio</a></li>
-          <li><a href="#" className="mobile-menu-link">Blog</a></li>
+          <li><a href="/portfolio" className="mobile-menu-link">Portfolio</a></li>
+          <li><a href="/blog" className="mobile-menu-link">Blog</a></li>
         </ul>
         <div className="mobile-menu-divider" />
-        <a href="#" className="mobile-menu-cta-link">Valuta la tua casa</a>
+        <a href="/valuta-casa" className="mobile-menu-cta-link">Valuta la tua casa</a>
       </div>
 
       {/* ══ STICKY HERO ══ */}
@@ -322,6 +322,6 @@ export default function HomePage() {
       {/* /sticky hero */}
 
       <HomeSections />
-    </>
+    </div>
   );
 }

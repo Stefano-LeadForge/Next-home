@@ -25,9 +25,9 @@ export default function Footer() {
             <h3 className="footer-col-title">Link Rapidi</h3>
             <ul className="footer-links">
               <li><a href="/">Home</a></li>
-              <li><a href="#">Portfolio</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Valuta Casa</a></li>
+              <li><a href="/portfolio">Portfolio</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/valuta-casa">Valuta Casa</a></li>
             </ul>
           </div>
 

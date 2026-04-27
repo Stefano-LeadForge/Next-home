@@ -80,7 +80,7 @@ export default function HomeSections() {
           ].map(({ id, src, alt, line2, delay }) => (
             <motion.a
               key={id}
-              href="#"
+              href="/portfolio"
               className="portfolio-card"
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -200,7 +200,7 @@ export default function HomeSections() {
             Affidati a Next Home per una valutazione professionale completa,
             mirata a valorizzare al meglio il tuo immobile sul mercato.
           </p>
-          <a href="#" className="cta-finale-btn">
+          <a href="/valuta-casa" className="cta-finale-btn">
             <span>Richiedi una valutazione</span>
             <span className="arr" />
           </a>
