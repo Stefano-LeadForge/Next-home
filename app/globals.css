@@ -681,18 +681,20 @@ nav.nav--solid {
   position: absolute; inset: 0;
   background: linear-gradient(
     to top,
-    rgba(8,22,31,0.82) 0%,
-    rgba(8,22,31,0.2) 55%,
-    rgba(8,22,31,0.05) 100%
+    rgba(8,22,31,0.92) 0%,
+    rgba(8,22,31,0.60) 38%,
+    rgba(8,22,31,0.18) 65%,
+    rgba(8,22,31,0.04) 100%
   );
   transition: background 400ms ease;
 }
 .portfolio-card:hover .portfolio-card-overlay {
   background: linear-gradient(
     to top,
-    rgba(8,22,31,0.88) 0%,
-    rgba(8,22,31,0.35) 55%,
-    rgba(8,22,31,0.1) 100%
+    rgba(8,22,31,0.96) 0%,
+    rgba(8,22,31,0.68) 38%,
+    rgba(8,22,31,0.22) 65%,
+    rgba(8,22,31,0.06) 100%
   );
 }
 

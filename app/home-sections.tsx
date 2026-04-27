@@ -8,7 +8,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const ARTICLES = [
   {
     id: 1,
-    src: '/blog-mercato.jpg',
+    src: '/copertina-articolo-mercato.png',
     alt: 'Mercato Immobiliare Milano',
     category: 'Mercato',
     date: '12 Aprile 2026',
@@ -19,8 +19,8 @@ const ARTICLES = [
   },
   {
     id: 2,
-    src: '/blog-affitti.jpg',
-    alt: 'Affitti Brevi',
+    src: '/copertina-articolo-bnb.png',
+    alt: 'Affitti Brevi Milano',
     category: 'Affitti Brevi',
     date: '28 Marzo 2026',
     title: 'Affitti brevi: guida completa per massimizzare i tuoi ricavi',
@@ -30,8 +30,8 @@ const ARTICLES = [
   },
   {
     id: 3,
-    src: '/blog-valutazione.jpg',
-    alt: 'Valutazione Casa',
+    src: '/copertina-articolo-valutazione.png',
+    alt: 'Valutazione Immobiliare',
     category: 'Guida',
     date: '10 Marzo 2026',
     title: 'Come valutare correttamente il prezzo della tua casa',
@@ -65,8 +65,8 @@ export default function HomeSections() {
 
         <div className="portfolio-grid">
           {[
-            { id: 1, src: '/portfolio-affitto.jpg', alt: 'Case in Affitto', line2: 'Affitto', delay: 0.1 },
-            { id: 2, src: '/portfolio-vendita.jpg', alt: 'Case in Vendita', line2: 'Vendita', delay: 0.22 },
+            { id: 1, src: '/copertina-affitto.png', alt: 'Case in Affitto Milano', line2: 'Affitto', delay: 0.1 },
+            { id: 2, src: '/copertina-vendita.png', alt: 'Case in Vendita Milano', line2: 'Vendita', delay: 0.22 },
           ].map(({ id, src, alt, line2, delay }) => (
             <motion.a
               key={id}
