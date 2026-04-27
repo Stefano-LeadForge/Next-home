@@ -17,13 +17,16 @@ export default function SmoothScrolling({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    // Uniform scroll normalization across all browsers
-    ScrollTrigger.normalizeScroll(true);
+    // normalizeScroll conflicts with native touch momentum — desktop (mouse) only
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (!isTouch) {
+      ScrollTrigger.normalizeScroll(true);
+    }
 
     const instance = new Lenis({
       lerp: 0.08,
       smoothWheel: true,
-      syncTouch: true,
+      syncTouch: false, // mobile keeps native scroll momentum
       wheelMultiplier: 1.0,
     });
 
