@@ -82,8 +82,6 @@ export default function HomePage() {
         .to('#title',    { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in', force3D: true }, 0.04)
         .to('#ctas',     { opacity: 0, y: -12, duration: 0.28, ease: 'power2.in', force3D: true }, 0.12)
         .to('#scrollCue',{ opacity: 0, duration: 0.2,  ease: 'power2.in' }, 0)
-        .to('.nav-links',{ opacity: 0, duration: 0.25, ease: 'power2.in' }, 0.02)
-        .to('.nav-btn',  { opacity: 0, duration: 0.25, ease: 'power2.in' }, 0.02)
         /* overlay settles */
         .to(imgOverlay,  { opacity: 1, duration: 0.2, ease: 'power1.out' }, 0.6)
         /* wall text once fully fullscreen */
@@ -107,14 +105,7 @@ export default function HomePage() {
           invalidateOnRefresh: true,
         },
       });
-      /* restore nav links once portfolio takes over (expansion faded them out) */
-      const navLinks = ScrollTrigger.create({
-        trigger: '#nextSection',
-        start: 'top 70%',
-        onEnter:     () => gsap.to(['.nav-links', '.nav-btn'], { opacity: 1, duration: 0.4, ease: 'power2.out', overwrite: true }),
-        onLeaveBack: () => gsap.to(['.nav-links', '.nav-btn'], { opacity: 0, duration: 0.25, ease: 'power2.in',  overwrite: true }),
-      });
-      return () => { cleanupExpand(); exitTween.kill(); navLinks.kill(); };
+      return () => { cleanupExpand(); exitTween.kill(); };
     });
     /* mobile: keep original scrub values — mobile feel is already correct */
     mm.add('(max-width: 768px)', () => {

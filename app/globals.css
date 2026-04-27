@@ -76,9 +76,7 @@ nav {
 }
 
 nav.nav--solid {
-  background: rgba(8, 22, 31, 0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: #0B1D26;
   border-bottom: 1px solid rgba(194, 205, 214, 0.08);
   box-shadow: 0 2px 28px rgba(0, 0, 0, 0.22);
 }
