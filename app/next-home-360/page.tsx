@@ -9,18 +9,6 @@ const sectionVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
 };
 
-const heroTagVariants = {
-  hidden: { opacity: 0, y: 14 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease, delay: 0.1 } },
-};
-const heroTitleVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease, delay: 0.4 } },
-};
-const heroSubVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 1.0, ease, delay: 0.85 } },
-};
 
 function BulletList({ items }: { items: string[] }) {
   return (
@@ -51,32 +39,15 @@ export default function NextHome360Page() {
         />
         <div className="nh360-cover-overlay" />
         <div className="nh360-cover-content">
-          <motion.span
-            className="nh360-cover-tag"
-            variants={heroTagVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            Il nostro servizio esclusivo
-          </motion.span>
-          <motion.h1
-            className="inner-hero-title"
-            variants={heroTitleVariants}
-            initial="hidden"
-            animate="visible"
-          >
+          <span className="nh360-cover-tag">Il nostro servizio esclusivo</span>
+          <h1 className="inner-hero-title">
             Next Home 360: <br />
             vendi il tuo immobile mentre genera reddito con gli affitti brevi
-          </motion.h1>
-          <motion.p
-            className="inner-hero-subtitle"
-            variants={heroSubVariants}
-            initial="hidden"
-            animate="visible"
-          >
+          </h1>
+          <p className="inner-hero-subtitle">
             Next Home 360 è il servizio esclusivo di Next Home pensato per i proprietari
             che vogliono vendere casa a Milano senza lasciare l&apos;immobile fermo.
-          </motion.p>
+          </p>
         </div>
       </div>
 

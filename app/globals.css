@@ -2148,3 +2148,21 @@ nav.nav--solid {
   .nh360-advantage-num { font-size: 1.7rem; }
   .nh360-cta-section { padding: 2.5rem 1.5rem; }
 }
+
+/* ── NH360 hero entrance — pure CSS (compositor thread, no JS RAF conflict) ── */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes nh360HeroEnter {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .nh360-page .nh360-cover-tag {
+    animation: nh360HeroEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  }
+  .nh360-page .inner-hero-title {
+    animation: nh360HeroEnter 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+  }
+  .nh360-page .inner-hero-subtitle {
+    animation: nh360HeroEnter 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both;
+  }
+}
