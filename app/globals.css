@@ -364,6 +364,7 @@ nav.nav--solid {
   border-radius: 4px;
   overflow: hidden;
   z-index: 5;
+  background-color: #0B1D26;
   will-change: transform, width, height, top, left, border-radius, opacity;
   backface-visibility: hidden;
   box-shadow:

@@ -244,6 +244,15 @@ export default function HomePage() {
 
   return (
     <div className="home-page">
+      {/* Preload mobile hero — React 19 hoists to <head>, browser preload-scans it immediately */}
+      <link
+        rel="preload"
+        as="image"
+        media="(max-width: 768px)"
+        imageSrcSet={heroMobileProps.srcSet}
+        imageSizes="100vw"
+        fetchPriority="high"
+      />
       {/* ══ FIXED NAV — outside heroWrap so position:fixed works correctly ══ */}
       <nav id="nav">
         <div className="logo-wrap">
