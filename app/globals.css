@@ -1844,28 +1844,37 @@ nav.nav--solid {
 /* ── cover hero ── */
 .nh360-cover {
   position: relative;
-  width: 100%; height: 72vh; min-height: 480px;
+  width: 100%; height: 82vh; min-height: 520px;
   overflow: hidden;
+  /* flex so content can sit at flex-end (bottom) with controlled spacing */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 .nh360-cover-overlay {
   position: absolute; inset: 0; z-index: 1;
+  /* transparent top → solid navy bottom: image breathes above, text stays legible */
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,0.15)  0%,
-    rgba(0,0,0,0.30)  45%,
-    rgba(8,22,31,0.88) 100%
+    transparent          0%,
+    transparent          30%,
+    rgba(8,22,31,0.52)   58%,
+    rgba(8,22,31,0.88)   78%,
+    #0B1D26             100%
   );
 }
 .nh360-cover-content {
-  position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
-  padding: 0 3.5rem 3.5rem;
+  position: relative; z-index: 2;
+  /* padding-bottom keeps text off the very edge; padding-top adds visual air above */
+  padding: 0 3.5rem 4.5rem;
   max-width: 900px;
 }
-/* title shadow — scoped to nh360 page where h1 sits over the cover image */
+/* title shadow — scoped to nh360 page; soft blur so it doesn't look hard */
 .nh360-page .inner-hero-title {
   text-shadow:
-    0 2px 28px rgba(11,29,38,0.9),
-    0 0  80px rgba(11,29,38,0.55);
+    0 1px  8px rgba(11,29,38,0.65),
+    0 4px 28px rgba(11,29,38,0.55),
+    0 0  100px rgba(11,29,38,0.35);
 }
 
 /* ── content wrapper ── */
@@ -2083,8 +2092,8 @@ nav.nav--solid {
 
 /* ── responsive ── */
 @media (max-width: 768px) {
-  .nh360-cover { height: 58vh; min-height: 340px; }
-  .nh360-cover-content { padding: 0 1.5rem 2.5rem; }
+  .nh360-cover { height: 62vh; min-height: 360px; }
+  .nh360-cover-content { padding: 0 1.5rem 3rem; }
   .nh360-content { padding: 2.5rem 1.5rem 5rem; }
   .nh360-section { margin-top: 3.25rem; }
   .nh360-advantage { grid-template-columns: 38px 1fr; gap: 0 1rem; }
