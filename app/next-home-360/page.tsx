@@ -53,10 +53,7 @@ export default function NextHome360Page() {
         />
         <div className="nh360-cover-overlay" />
         <div className="nh360-cover-content">
-          <div className="inner-hero-eyebrow">
-            <div className="inner-hero-eyebrow-line" />
-            <span>Il nostro servizio esclusivo</span>
-          </div>
+          <span className="nh360-cover-tag">Il nostro servizio esclusivo</span>
           <h1 className="inner-hero-title">
             Next Home 360: <br />
             vendi il tuo immobile mentre genera reddito con gli affitti brevi
