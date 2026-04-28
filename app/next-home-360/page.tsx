@@ -28,14 +28,31 @@ export default function NextHome360Page() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    tl
-      .from('.inner-hero-eyebrow',  { opacity: 0, y: 16, duration: 0.7 })
-      .from('.inner-hero-title',    { opacity: 0, y: 24, duration: 0.9 }, '-=0.45')
-      .from('.inner-hero-subtitle', { opacity: 0, y: 16, duration: 0.8 }, '-=0.55')
-      .from('.nh360-content',       { opacity: 0, y: 22, duration: 0.8 }, '-=0.4');
+    const mm = gsap.matchMedia();
 
-    return () => { tl.kill(); };
+    // Desktop: expo.out gives the "buttery" deceleration the brand calls for
+    mm.add('(min-width: 769px)', () => {
+      const tl = gsap.timeline({ defaults: { ease: 'expo.out', force3D: true } });
+      tl
+        .from('.nh360-cover-tag',     { opacity: 0, y: 14, duration: 0.9 })
+        .from('.inner-hero-title',    { opacity: 0, y: 40, duration: 1.2 }, '-=0.55')
+        .from('.inner-hero-subtitle', { opacity: 0, y: 20, duration: 1.0 }, '-=0.70')
+        .from('.nh360-content',       { opacity: 0, y: 28, duration: 0.9 }, '-=0.5');
+      return () => tl.kill();
+    });
+
+    // Mobile: snappier — power3.out keeps it light without the long tail
+    mm.add('(max-width: 768px)', () => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      tl
+        .from('.nh360-cover-tag',     { opacity: 0, y: 10, duration: 0.7 })
+        .from('.inner-hero-title',    { opacity: 0, y: 24, duration: 0.9 }, '-=0.45')
+        .from('.inner-hero-subtitle', { opacity: 0, y: 16, duration: 0.8 }, '-=0.55')
+        .from('.nh360-content',       { opacity: 0, y: 22, duration: 0.8 }, '-=0.4');
+      return () => tl.kill();
+    });
+
+    return () => mm.kill();
   }, []);
 
   return (

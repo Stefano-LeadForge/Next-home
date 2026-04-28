@@ -119,6 +119,7 @@ export default function HomePage() {
           start: 'top bottom',
           end: 'top 55%',
           scrub: 0.4,
+          fastScrollEnd: true,  // snap immediately when user throws scroll past exit zone
           invalidateOnRefresh: true,
         },
       });
@@ -136,6 +137,7 @@ export default function HomePage() {
           start: 'top bottom',
           end: 'top 55%',
           scrub: 1.0,
+          fastScrollEnd: true,
           invalidateOnRefresh: true,
         },
       });
