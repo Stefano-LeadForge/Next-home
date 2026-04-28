@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import gsap from 'gsap';
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -40,20 +41,31 @@ export default function NextHome360Page() {
   return (
     <main className="nh360-page">
 
-      {/* ── HERO ── */}
-      <div className="inner-hero">
-        <div className="inner-hero-eyebrow">
-          <div className="inner-hero-eyebrow-line" />
-          <span>Il nostro servizio esclusivo</span>
+      {/* ── COVER HERO ── */}
+      <div className="nh360-cover">
+        <Image
+          src="/brand_assets/copertina-next-home-360.png"
+          alt="Next Home 360 — servizio esclusivo"
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+        />
+        <div className="nh360-cover-overlay" />
+        <div className="nh360-cover-content">
+          <div className="inner-hero-eyebrow">
+            <div className="inner-hero-eyebrow-line" />
+            <span>Il nostro servizio esclusivo</span>
+          </div>
+          <h1 className="inner-hero-title">
+            Next Home 360: <br />
+            vendi il tuo immobile mentre genera reddito con gli affitti brevi
+          </h1>
+          <p className="inner-hero-subtitle">
+            Next Home 360 è il servizio esclusivo di Next Home pensato per i proprietari
+            che vogliono vendere casa a Milano senza lasciare l&apos;immobile fermo.
+          </p>
         </div>
-        <h1 className="inner-hero-title">
-          Next Home 360: <br />
-          vendi il tuo immobile mentre genera reddito con gli affitti brevi
-        </h1>
-        <p className="inner-hero-subtitle">
-          Next Home 360 è il servizio esclusivo di Next Home pensato per i proprietari
-          che vogliono vendere casa a Milano senza lasciare l&apos;immobile fermo.
-        </p>
       </div>
 
       {/* ── BODY ── */}
