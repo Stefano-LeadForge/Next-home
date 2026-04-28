@@ -1654,6 +1654,11 @@ nav.nav--solid {
   font-size: 11px; font-weight: 300; font-style: italic;
   color: rgba(246,244,241,0.3);
 }
+.valuta-error {
+  margin-bottom: 0.75rem;
+  font-size: 13px; font-weight: 300;
+  color: #e07070;
+}
 
 .valuta-success {
   text-align: center; padding: 4rem 2rem;

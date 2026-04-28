@@ -9,6 +9,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 export default function ValutaCasaPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [form, setForm] = useState({
     nome: '',
     email: '',
@@ -37,9 +38,26 @@ export default function ValutaCasaPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    await new Promise((res) => setTimeout(res, 1200));
-    setLoading(false);
-    setSubmitted(true);
+    setError('');
+
+    try {
+      const res = await fetch('/api/valutazione', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error ?? 'Errore durante l\'invio. Riprova più tardi.');
+      } else {
+        setSubmitted(true);
+      }
+    } catch {
+      setError('Errore di rete. Controlla la connessione e riprova.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -144,6 +162,9 @@ export default function ValutaCasaPage() {
               />
             </div>
             <div>
+              {error && (
+                <p className="valuta-error">{error}</p>
+              )}
               <button type="submit" className="valuta-submit" disabled={loading}>
                 <span>{loading ? 'Invio in corso…' : 'Richiedi la valutazione'}</span>
                 {!loading && <span className="arr" />}
