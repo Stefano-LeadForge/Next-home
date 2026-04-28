@@ -70,7 +70,7 @@ nav {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 2rem 3.5rem;
+  padding: 1.4rem 3.5rem;
   opacity: 0; transform: translateY(-12px);
   /* pre-declare border so the transition only changes color, never geometry */
   border-bottom: 1px solid transparent;
@@ -1212,10 +1212,16 @@ nav.nav--solid {
 ══════════════════════════════════════ */
 .static-header {
   position: sticky; top: 0; z-index: 100;
-  background: #0B1D26;
+  background: transparent;
   padding: 1.25rem 3.5rem;
   display: flex; align-items: center; justify-content: space-between;
-  border-bottom: 1px solid rgba(194,205,214,0.08);
+  border-bottom: 1px solid transparent;
+  transition: background 350ms ease, border-color 350ms ease, box-shadow 350ms ease;
+}
+.static-header--solid {
+  background: #0B1D26;
+  border-bottom-color: rgba(194,205,214,0.08);
+  box-shadow: 0 2px 28px rgba(0,0,0,0.22);
 }
 .static-header-logo {
   display: flex; align-items: center; gap: 12px;

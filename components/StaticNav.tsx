@@ -11,7 +11,20 @@ export default function StaticNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const mobileIsOpen = useRef(false);
+
+  // Transparent → solid on scroll (matches home nav behaviour)
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    function onScroll() {
+      header!.classList.toggle('static-header--solid', window.scrollY > 50);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // apply immediately in case page loads already scrolled
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -24,10 +37,13 @@ export default function StaticNav() {
     return () => document.removeEventListener('mousedown', onOutsideClick);
   }, []);
 
-  // Close everything on route change
+  // Close everything on route change; re-evaluate sticky state after scroll reset
   useEffect(() => {
     setPortfolioOpen(false);
     if (mobileIsOpen.current) closeMobile();
+    if (headerRef.current) {
+      headerRef.current.classList.toggle('static-header--solid', window.scrollY > 50);
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
@@ -71,7 +87,7 @@ export default function StaticNav() {
 
   return (
     <>
-      <header className="static-header">
+      <header className="static-header" ref={headerRef}>
         {/* Logo */}
         <a href="/" className="static-header-logo" aria-label="Torna alla home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
