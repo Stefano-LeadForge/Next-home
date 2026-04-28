@@ -47,8 +47,8 @@ export async function POST(request: Request) {
       </div>`;
 
     const { error } = await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: 'Info@nexthomemilano.it',
+      from: 'Next Home <info@nexthomemilano.it>',
+      to: 'info@nexthomemilano.it',
       replyTo: email,
       subject: `Richiesta di valutazione — ${nome}`,
       html,
