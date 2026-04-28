@@ -185,7 +185,6 @@ export default function HomeSections() {
           fill
           sizes="100vw"
           style={{ objectFit: 'cover', objectPosition: 'center top' }}
-          priority
         />
         <div className="cta-finale-overlay" />
         <motion.div

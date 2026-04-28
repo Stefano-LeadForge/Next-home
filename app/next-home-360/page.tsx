@@ -77,12 +77,13 @@ export default function NextHome360Page() {
         />
         <div className="nh360-cover-overlay" />
         <div className="nh360-cover-content">
-          <span className="nh360-cover-tag">Il nostro servizio esclusivo</span>
-          <h1 className="inner-hero-title">
+          {/* opacity:0 inline prevents SSR flash before GSAP useEffect runs */}
+          <span className="nh360-cover-tag" style={{ opacity: 0 }}>Il nostro servizio esclusivo</span>
+          <h1 className="inner-hero-title" style={{ opacity: 0 }}>
             Next Home 360: <br />
             vendi il tuo immobile mentre genera reddito con gli affitti brevi
           </h1>
-          <p className="inner-hero-subtitle">
+          <p className="inner-hero-subtitle" style={{ opacity: 0 }}>
             Next Home 360 è il servizio esclusivo di Next Home pensato per i proprietari
             che vogliono vendere casa a Milano senza lasciare l&apos;immobile fermo.
           </p>

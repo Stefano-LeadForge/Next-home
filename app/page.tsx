@@ -331,6 +331,7 @@ export default function HomePage() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               {...heroDesktopProps}
+              decoding="async"
               className="media-img"
               style={{ objectFit: 'cover', objectPosition: 'center 40%' }}
             />
