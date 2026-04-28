@@ -70,8 +70,10 @@ export default function NextHome360Page() {
 
         {/* Intro */}
         <div className="nh360-intro">
-          <p className="nh360-lead">
+          <h2 className="nh360-intro-title">
             Come puoi valorizzare al massimo il tuo appartamento mentre è sul mercato?
+          </h2>
+          <p className="nh360-lead">
             Attraverso una gestione professionale con la formula degli affitti brevi,
             tramite le principali piattaforme come <strong>Airbnb e Booking</strong>,
             trasformiamo il tempo di attesa in un&apos;opportunità concreta di reddito.

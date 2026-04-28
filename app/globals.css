@@ -1875,20 +1875,34 @@ nav.nav--solid {
   max-width: 900px;
 }
 .nh360-cover-tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'DM Sans', sans-serif;
   font-size: 10px;
+  line-height: 1;
   font-weight: 400;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--silver-light);
   background: rgba(8,22,31,0.80);
   border: 1px solid rgba(194,205,214,0.22);
   border-radius: 3px;
-  padding: 6px 14px;
+  padding: 5px 12px;
   margin-bottom: 1.3rem;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+}
+
+/* ── intro question subtitle ── */
+.nh360-intro-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  margin-bottom: 2rem;
 }
 /* titolo: ridotto per stare compatto nella zona d'ombra; ombra morbida navy */
 .nh360-page .inner-hero-title {
