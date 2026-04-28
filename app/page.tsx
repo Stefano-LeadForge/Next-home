@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { getImageProps } from 'next/image';
 import HomeSections from './home-sections';
 import { useLenis } from '@/components/SmoothScrolling';
 import gsap from 'gsap';
@@ -9,6 +10,26 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+// Computed once at module level — avoids re-running on every render
+const { props: heroDesktopProps } = getImageProps({
+  src: '/hero.jpg',
+  alt: 'Proprietà luxury Milano',
+  width: 1920,
+  height: 1080,
+  sizes: '100vw',
+  quality: 80,
+  priority: true,
+});
+const { props: heroMobileProps } = getImageProps({
+  src: '/hero-mobile.png',
+  alt: 'Proprietà luxury Milano',
+  width: 828,
+  height: 1792,
+  sizes: '100vw',
+  quality: 75,
+  priority: true,
+});
 
 export default function HomePage() {
   const scrollCueRef = useRef<HTMLDivElement>(null);
@@ -306,13 +327,12 @@ export default function HomePage() {
         {/* MEDIA EXPANSION — responsive image source */}
         <div className="media-expand-wrap" id="mediaCard">
           <picture>
-            <source media="(max-width: 768px)" srcSet="/hero-mobile.png" />
+            <source media="(max-width: 768px)" srcSet={heroMobileProps.srcSet} />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
+              {...heroDesktopProps}
               className="media-img"
-              style={{ objectPosition: 'center 40%' }}
-              src="/hero.jpg"
-              alt="Proprietà luxury Milano"
+              style={{ objectFit: 'cover', objectPosition: 'center 40%' }}
             />
           </picture>
           <div className="media-overlay" id="imgOverlay" />
