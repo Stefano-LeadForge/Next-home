@@ -1,14 +1,25 @@
 'use client';
 
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import gsap from 'gsap';
 
 const ease = [0.16, 1, 0.3, 1] as const;
 const sectionVariants = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease } },
+};
+
+const heroTagVariants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease, delay: 0.1 } },
+};
+const heroTitleVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease, delay: 0.4 } },
+};
+const heroSubVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.0, ease, delay: 0.85 } },
 };
 
 function BulletList({ items }: { items: string[] }) {
@@ -25,43 +36,6 @@ function BulletList({ items }: { items: string[] }) {
 }
 
 export default function NextHome360Page() {
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const mm = gsap.matchMedia();
-
-    // Desktop: gsap.set() locks the hidden state synchronously before any paint,
-    // then .to() animates cleanly without GSAP reading stale CSS state at start.
-    mm.add('(min-width: 769px)', () => {
-      gsap.set('.nh360-cover-tag',     { opacity: 0, y: 14, force3D: true });
-      gsap.set('.inner-hero-title',    { opacity: 0, y: 40, force3D: true });
-      gsap.set('.inner-hero-subtitle', { opacity: 0, y: 20, force3D: true });
-
-      const tl = gsap.timeline({ defaults: { ease: 'expo.out', force3D: true } });
-      tl
-        .to('.nh360-cover-tag',     { opacity: 1, y: 0, duration: 0.9 }, 0.1)
-        .to('.inner-hero-title',    { opacity: 1, y: 0, duration: 1.2 }, 0.4)
-        .to('.inner-hero-subtitle', { opacity: 1, y: 0, duration: 1.0 }, 0.85);
-      return () => tl.kill();
-    });
-
-    // Mobile: same pattern, lighter values
-    mm.add('(max-width: 768px)', () => {
-      gsap.set('.nh360-cover-tag',     { opacity: 0, y: 10, force3D: true });
-      gsap.set('.inner-hero-title',    { opacity: 0, y: 24, force3D: true });
-      gsap.set('.inner-hero-subtitle', { opacity: 0, y: 16, force3D: true });
-
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out', force3D: true } });
-      tl
-        .to('.nh360-cover-tag',     { opacity: 1, y: 0, duration: 0.7 }, 0.1)
-        .to('.inner-hero-title',    { opacity: 1, y: 0, duration: 0.9 }, 0.4)
-        .to('.inner-hero-subtitle', { opacity: 1, y: 0, duration: 0.8 }, 0.8);
-      return () => tl.kill();
-    });
-
-    return () => mm.kill();
-  }, []);
-
   return (
     <main className="nh360-page">
 
@@ -77,16 +51,32 @@ export default function NextHome360Page() {
         />
         <div className="nh360-cover-overlay" />
         <div className="nh360-cover-content">
-          {/* opacity:0 inline prevents SSR flash before GSAP useEffect runs */}
-          <span className="nh360-cover-tag" style={{ opacity: 0 }}>Il nostro servizio esclusivo</span>
-          <h1 className="inner-hero-title" style={{ opacity: 0 }}>
+          <motion.span
+            className="nh360-cover-tag"
+            variants={heroTagVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            Il nostro servizio esclusivo
+          </motion.span>
+          <motion.h1
+            className="inner-hero-title"
+            variants={heroTitleVariants}
+            initial="hidden"
+            animate="visible"
+          >
             Next Home 360: <br />
             vendi il tuo immobile mentre genera reddito con gli affitti brevi
-          </h1>
-          <p className="inner-hero-subtitle" style={{ opacity: 0 }}>
+          </motion.h1>
+          <motion.p
+            className="inner-hero-subtitle"
+            variants={heroSubVariants}
+            initial="hidden"
+            animate="visible"
+          >
             Next Home 360 è il servizio esclusivo di Next Home pensato per i proprietari
             che vogliono vendere casa a Milano senza lasciare l&apos;immobile fermo.
-          </p>
+          </motion.p>
         </div>
       </div>
 
