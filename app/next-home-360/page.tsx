@@ -49,7 +49,7 @@ export default function NextHome360Page() {
           fill
           priority
           sizes="100vw"
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
+          style={{ objectFit: 'cover', objectPosition: 'center', filter: 'brightness(0.8)' }}
         />
         <div className="nh360-cover-overlay" />
         <div className="nh360-cover-content">

@@ -1844,37 +1844,43 @@ nav.nav--solid {
 /* ── cover hero ── */
 .nh360-cover {
   position: relative;
-  width: 100%; height: 82vh; min-height: 520px;
+  width: 100%; height: 88vh; min-height: 540px;
   overflow: hidden;
-  /* flex so content can sit at flex-end (bottom) with controlled spacing */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
 .nh360-cover-overlay {
   position: absolute; inset: 0; z-index: 1;
-  /* transparent top → solid navy bottom: image breathes above, text stays legible */
-  background: linear-gradient(
-    to bottom,
-    transparent          0%,
-    transparent          30%,
-    rgba(8,22,31,0.52)   58%,
-    rgba(8,22,31,0.88)   78%,
-    #0B1D26             100%
-  );
+  background:
+    /* vignetta angolo alto-sinistra: scurisce la zona delle finestre */
+    linear-gradient(
+      148deg,
+      rgba(8,22,31,0.62) 0%,
+      transparent        48%
+    ),
+    /* gradiente verticale: trasparente in alto, navy pieno in basso */
+    linear-gradient(
+      to bottom,
+      transparent          0%,
+      transparent          38%,
+      rgba(8,22,31,0.70)   65%,
+      rgba(8,22,31,0.94)   82%,
+      #0B1D26             100%
+    );
 }
 .nh360-cover-content {
   position: relative; z-index: 2;
-  /* padding-bottom keeps text off the very edge; padding-top adds visual air above */
-  padding: 0 3.5rem 4.5rem;
+  padding: 0 3.5rem 5rem;
   max-width: 900px;
 }
-/* title shadow — scoped to nh360 page; soft blur so it doesn't look hard */
+/* titolo: ridotto per stare compatto nella zona d'ombra; ombra morbida navy */
 .nh360-page .inner-hero-title {
+  font-size: clamp(2.0rem, 4vw, 3.2rem);
   text-shadow:
-    0 1px  8px rgba(11,29,38,0.65),
-    0 4px 28px rgba(11,29,38,0.55),
-    0 0  100px rgba(11,29,38,0.35);
+    0 1px  6px rgba(11,29,38,0.6),
+    0 4px 24px rgba(11,29,38,0.5),
+    0 0   90px rgba(11,29,38,0.3);
 }
 
 /* ── content wrapper ── */
@@ -2092,8 +2098,9 @@ nav.nav--solid {
 
 /* ── responsive ── */
 @media (max-width: 768px) {
-  .nh360-cover { height: 62vh; min-height: 360px; }
-  .nh360-cover-content { padding: 0 1.5rem 3rem; }
+  .nh360-cover { height: 64vh; min-height: 380px; }
+  .nh360-cover-content { padding: 0 1.5rem 3.5rem; }
+  .nh360-page .inner-hero-title { font-size: clamp(1.75rem, 6.5vw, 2.4rem); }
   .nh360-content { padding: 2.5rem 1.5rem 5rem; }
   .nh360-section { margin-top: 3.25rem; }
   .nh360-advantage { grid-template-columns: 38px 1fr; gap: 0 1rem; }
