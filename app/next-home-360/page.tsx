@@ -30,25 +30,32 @@ export default function NextHome360Page() {
 
     const mm = gsap.matchMedia();
 
-    // Desktop: expo.out gives the "buttery" deceleration the brand calls for
+    // Desktop: gsap.set() locks the hidden state synchronously before any paint,
+    // then .to() animates cleanly without GSAP reading stale CSS state at start.
     mm.add('(min-width: 769px)', () => {
+      gsap.set('.nh360-cover-tag',     { opacity: 0, y: 14, force3D: true });
+      gsap.set('.inner-hero-title',    { opacity: 0, y: 40, force3D: true });
+      gsap.set('.inner-hero-subtitle', { opacity: 0, y: 20, force3D: true });
+
       const tl = gsap.timeline({ defaults: { ease: 'expo.out', force3D: true } });
       tl
-        .from('.nh360-cover-tag',     { opacity: 0, y: 14, duration: 0.9 })
-        .from('.inner-hero-title',    { opacity: 0, y: 40, duration: 1.2 }, '-=0.55')
-        .from('.inner-hero-subtitle', { opacity: 0, y: 20, duration: 1.0 }, '-=0.70')
-        .from('.nh360-content',       { opacity: 0, y: 28, duration: 0.9 }, '-=0.5');
+        .to('.nh360-cover-tag',     { opacity: 1, y: 0, duration: 0.9 }, 0.1)
+        .to('.inner-hero-title',    { opacity: 1, y: 0, duration: 1.2 }, 0.4)
+        .to('.inner-hero-subtitle', { opacity: 1, y: 0, duration: 1.0 }, 0.85);
       return () => tl.kill();
     });
 
-    // Mobile: snappier — power3.out keeps it light without the long tail
+    // Mobile: same pattern, lighter values
     mm.add('(max-width: 768px)', () => {
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      gsap.set('.nh360-cover-tag',     { opacity: 0, y: 10, force3D: true });
+      gsap.set('.inner-hero-title',    { opacity: 0, y: 24, force3D: true });
+      gsap.set('.inner-hero-subtitle', { opacity: 0, y: 16, force3D: true });
+
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out', force3D: true } });
       tl
-        .from('.nh360-cover-tag',     { opacity: 0, y: 10, duration: 0.7 })
-        .from('.inner-hero-title',    { opacity: 0, y: 24, duration: 0.9 }, '-=0.45')
-        .from('.inner-hero-subtitle', { opacity: 0, y: 16, duration: 0.8 }, '-=0.55')
-        .from('.nh360-content',       { opacity: 0, y: 22, duration: 0.8 }, '-=0.4');
+        .to('.nh360-cover-tag',     { opacity: 1, y: 0, duration: 0.7 }, 0.1)
+        .to('.inner-hero-title',    { opacity: 1, y: 0, duration: 0.9 }, 0.4)
+        .to('.inner-hero-subtitle', { opacity: 1, y: 0, duration: 0.8 }, 0.8);
       return () => tl.kill();
     });
 
