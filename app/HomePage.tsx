@@ -316,7 +316,7 @@ export default function HomePage() {
             <div className="hero-text-block">
               <div className="hero-eyebrow" id="eyebrow">
                 <div className="eyebrow-line" />
-                <h1 className="eyebrow-text">La tua Agenzia Immobiliare in Centro a Milano</h1>
+                <h1 className="eyebrow-text">La tua Agenzia Immobiliare <span className="eyebrow-break">in Centro a Milano</span></h1>
               </div>
               <h2 className="hero-title" id="title">
                 Diamo valore <br />

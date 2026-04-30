@@ -257,6 +257,7 @@ nav.nav--solid {
   font-size: 10px; font-weight: 400; letter-spacing: 0.32em;
   text-transform: uppercase; color: var(--silver);
 }
+.eyebrow-break { display: block; }
 
 .hero-title {
   font-family: var(--font-cormorant), serif;
@@ -570,7 +571,8 @@ nav.nav--solid {
 
 /* desktop: slightly looser leading so ascenders/descenders never touch */
 @media (min-width: 769px) {
-  .hero-title { line-height: 1.14; }
+  .hero-eyebrow { margin-bottom: 1.5rem; }
+  .hero-title   { line-height: 1.14; font-size: clamp(3.0rem, 5.0vw, 4.6rem); }
 }
 
 /* ══════════════════════════════════════
