@@ -58,9 +58,9 @@ export default function HomePage() {
       // Page loaded already scrolled (refresh mid-page): apply post-entrance
       // state instantly so ScrollTrigger's scrub has clean from-values.
       gsap.set('#nav',       { opacity: 1, y: 0 });
-      gsap.set('#eyebrow',   { opacity: 1, y: 0 });
-      gsap.set('#title',     { opacity: 1, y: 0 });
-      gsap.set('#ctas',      { opacity: 1, y: 0 });
+      gsap.set('#eyebrow',   { autoAlpha: 1, y: 0 });
+      gsap.set('#title',     { autoAlpha: 1, y: 0 });
+      gsap.set('#ctas',      { autoAlpha: 1, y: 0 });
       gsap.set('#mediaCard', { opacity: 1 });
       cue.classList.add('visible');
     } else {
@@ -98,6 +98,7 @@ export default function HomePage() {
           start: 'top top',
           end: '+=120%',
           scrub,
+          fastScrollEnd: true,
           onUpdate: (self) => {
             if (self.progress > 0.02) cue.classList.remove('visible');
             else                      cue.classList.add('visible');
@@ -115,11 +116,12 @@ export default function HomePage() {
           borderRadius: 0,
           ease: 'power2.inOut', duration: 0.6, force3D: true,
         }, 0)
-        /* dissolve UI — explicit from so reverse always restores to opacity:1 */
-        .fromTo('#eyebrow',   { opacity: 1, y: 0 }, { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in', force3D: true }, 0)
-        .fromTo('#title',     { opacity: 1, y: 0 }, { opacity: 0, y: -12, duration: 0.35, ease: 'power2.in', force3D: true }, 0.04)
-        .fromTo('#ctas',      { opacity: 1, y: 0 }, { opacity: 0, y: -12, duration: 0.28, ease: 'power2.in', force3D: true }, 0.12)
-        .fromTo('#scrollCue', { opacity: 1 },        { opacity: 0, duration: 0.2, ease: 'power2.in' }, 0)
+        /* dissolve UI — autoAlpha sets visibility:hidden at 0 so invisible elements
+           never intercept pointer events (fixes wall-btn blocked by #ctas on mobile) */
+        .fromTo('#eyebrow',   { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -12, duration: 0.35, ease: 'power2.in', force3D: true }, 0)
+        .fromTo('#title',     { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -12, duration: 0.35, ease: 'power2.in', force3D: true }, 0.04)
+        .fromTo('#ctas',      { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -12, duration: 0.28, ease: 'power2.in', force3D: true }, 0.12)
+        .fromTo('#scrollCue', { autoAlpha: 1 },        { autoAlpha: 0, duration: 0.2, ease: 'power2.in' }, 0)
         /* overlay settles */
         .fromTo(imgOverlay,   { opacity: 0 },        { opacity: 1, duration: 0.2, ease: 'power1.out' }, 0.6)
         /* wall text once fully fullscreen */
@@ -128,9 +130,9 @@ export default function HomePage() {
       return () => tl.kill();
     }
 
-    /* desktop: lower scrub matches Lenis lerp timing → consistent feel page-wide */
+    /* desktop: scrub 0.3 ≈ Lenis lerp 0.08 feel; fastScrollEnd handles fast throws */
     mm.add('(min-width: 769px)', () => {
-      const cleanupExpand = buildExpandTl(0.5, 0.62);
+      const cleanupExpand = buildExpandTl(0.3, 0.62);
       const exitTween = gsap.to('#heroWrap', {
         y: () => -window.innerHeight * 0.45,
         opacity: 0,
@@ -146,9 +148,9 @@ export default function HomePage() {
       });
       return () => { cleanupExpand(); exitTween.kill(); };
     });
-    /* mobile: keep original scrub values — mobile feel is already correct */
+    /* mobile: native scroll has no lerp (syncTouch:false) — lower scrub prevents lag */
     mm.add('(max-width: 768px)', () => {
-      const cleanupExpand = buildExpandTl(1.5, 0.75);
+      const cleanupExpand = buildExpandTl(0.7, 0.75);
       const exitTween = gsap.to('#heroWrap', {
         y: () => -window.innerHeight * 0.45,
         opacity: 0,
