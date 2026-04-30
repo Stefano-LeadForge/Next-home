@@ -17,7 +17,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="footer-tagline">
-              La tua agenzia immobiliare di fiducia a Milano.
+              Agenzia immobiliare specializzata in immobili di pregio a Milano Centro, Missori e Duomo.
             </p>
           </div>
 
@@ -77,6 +77,11 @@ export default function Footer() {
           </div>
 
         </div>
+
+        {/* ── IDENTITÀ FISCALE ── */}
+        <p className="footer-fiscal">
+          NextHome Real Estate di Arianna Sabatino{' | '}P.IVA 12440480965
+        </p>
 
         {/* ── BARRA BOTTOM: copyright + note legali ── */}
         <div className="footer-bar">

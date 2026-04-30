@@ -1374,6 +1374,11 @@ nav.nav--solid {
 }
 .footer-legal-links a:hover { color: rgba(246,244,241,0.6); }
 .footer-sep { color: rgba(194,205,214,0.18); font-size: 10px; }
+.footer-fiscal {
+  font-size: 10.5px; font-weight: 300; letter-spacing: 0.03em;
+  color: rgba(246,244,241,0.22); line-height: 1.5;
+  margin-bottom: 0.65rem;
+}
 
 @media (max-width: 768px) {
   .footer-inner { padding: 2.5rem 1.5rem 1.5rem; }
