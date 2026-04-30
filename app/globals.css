@@ -2175,3 +2175,319 @@ nav.nav--solid {
     animation: nh360HeroEnter 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both;
   }
 }
+
+/* ══════════════════════════════════════
+   GUIDE OSPITI
+══════════════════════════════════════ */
+
+/* ── Index page ── */
+.guide-index-page {
+  padding: 8rem 3.5rem 6rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.guide-index-header { margin-bottom: 3.5rem; }
+
+.guide-index-eyebrow {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 1.25rem;
+}
+.guide-index-eyebrow-line { width: 36px; height: 1px; background: var(--silver); }
+.guide-index-eyebrow-text {
+  font-size: 10px; font-weight: 400; letter-spacing: 0.32em;
+  text-transform: uppercase; color: var(--silver);
+}
+
+.guide-index-title {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 300;
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  line-height: 1.1; letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 1.1rem;
+}
+
+.guide-index-intro {
+  font-size: 14px; font-weight: 300; line-height: 1.85;
+  color: rgba(246,244,241,0.50);
+  max-width: 500px;
+}
+
+.guide-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.guide-card {
+  display: flex; flex-direction: column;
+  padding: 1.75rem 1.5rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(194,205,214,0.09);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--white);
+  transition: background 250ms ease, border-color 250ms ease, transform 250ms ease;
+  min-height: 150px;
+}
+.guide-card:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(194,205,214,0.22);
+  transform: translateY(-3px);
+}
+
+.guide-card-number {
+  display: block;
+  font-size: 9px; font-weight: 400; letter-spacing: 0.28em;
+  text-transform: uppercase; color: rgba(138,155,170,0.5);
+  margin-bottom: auto; padding-bottom: 1.75rem;
+}
+
+.guide-card-label {
+  display: block;
+  font-family: var(--font-cormorant), serif;
+  font-weight: 300; font-size: 1.2rem; line-height: 1.2;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.guide-card-arrow {
+  display: block;
+  width: 20px; height: 1px;
+  background: rgba(138,155,170,0.4);
+  position: relative;
+  transition: width 250ms ease;
+}
+.guide-card-arrow::after {
+  content: ''; position: absolute; right: 0; top: -3px;
+  width: 6px; height: 6px;
+  border-right: 1px solid rgba(138,155,170,0.4);
+  border-top: 1px solid rgba(138,155,170,0.4);
+  transform: rotate(45deg);
+}
+.guide-card:hover .guide-card-arrow { width: 28px; }
+
+@media (max-width: 768px) {
+  .guide-index-page { padding: 6.5rem 1.5rem 5rem; }
+  .guide-cards-grid { grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
+}
+
+/* ── Content page ── */
+.guide-content-page {
+  padding: 8rem 3.5rem 6rem;
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+.guide-content-header { margin-bottom: 2.5rem; }
+
+.guide-content-eyebrow {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 1.25rem;
+}
+.guide-content-eyebrow-line { width: 36px; height: 1px; background: var(--silver); }
+.guide-content-eyebrow-text {
+  font-size: 10px; font-weight: 400; letter-spacing: 0.32em;
+  text-transform: uppercase; color: var(--silver);
+}
+
+.guide-content-title {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 300;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 1.1; letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 0.9rem;
+}
+
+.guide-content-welcome {
+  font-size: 14px; font-weight: 300; line-height: 1.85;
+  color: rgba(246,244,241,0.50);
+  max-width: 540px;
+}
+
+.guide-divider {
+  width: 100%; height: 1px;
+  background: rgba(194,205,214,0.1);
+}
+
+.guide-accordion-list { margin-bottom: 3rem; }
+
+.guide-accordion {
+  border-bottom: 1px solid rgba(194,205,214,0.1);
+}
+
+.guide-accordion summary {
+  list-style: none;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.35rem 0;
+  cursor: pointer;
+  font-size: 10.5px; font-weight: 400; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(246,244,241,0.65);
+  user-select: none;
+  transition: color 200ms ease;
+}
+.guide-accordion summary::-webkit-details-marker { display: none; }
+.guide-accordion summary::marker { display: none; }
+.guide-accordion summary:hover { color: var(--white); }
+
+.guide-accordion-icon {
+  width: 18px; height: 18px;
+  position: relative; flex-shrink: 0; margin-left: 1rem;
+}
+.guide-accordion-icon::before,
+.guide-accordion-icon::after {
+  content: '';
+  position: absolute;
+  background: var(--silver);
+  transition: transform 280ms ease, opacity 200ms ease;
+}
+.guide-accordion-icon::before {
+  top: 50%; left: 2px; right: 2px; height: 1px;
+  transform: translateY(-50%);
+}
+.guide-accordion-icon::after {
+  left: 50%; top: 2px; bottom: 2px; width: 1px;
+  transform: translateX(-50%);
+}
+.guide-accordion[open] .guide-accordion-icon::after {
+  transform: translateX(-50%) rotate(90deg);
+  opacity: 0;
+}
+
+.guide-accordion-body {
+  padding-bottom: 1.5rem;
+  font-size: 14px; font-weight: 300; line-height: 1.85;
+  color: rgba(246,244,241,0.50);
+}
+
+@keyframes accordionFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.guide-accordion[open] .guide-accordion-body {
+  animation: accordionFadeIn 0.22s ease;
+}
+
+.guide-back-link {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 10px; font-weight: 400; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(138,155,170,0.6);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+.guide-back-link:hover { color: var(--silver-light); }
+
+@media (max-width: 768px) {
+  .guide-content-page { padding: 6.5rem 1.5rem 5rem; }
+}
+
+/* ── Login page ── */
+.guide-login-page {
+  min-height: calc(100vh - 4rem);
+  display: flex; align-items: center; justify-content: center;
+  padding: 2rem 1.5rem;
+}
+
+.guide-login-card {
+  width: 100%; max-width: 340px;
+  text-align: center;
+}
+
+.guide-login-eyebrow {
+  font-size: 9.5px; font-weight: 400; letter-spacing: 0.32em;
+  text-transform: uppercase; color: var(--silver);
+  margin-bottom: 0.9rem;
+}
+
+.guide-login-title {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 300; font-size: 2rem; line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 2.5rem;
+}
+
+.guide-login-form {
+  display: flex; flex-direction: column; gap: 0.85rem;
+}
+
+.guide-login-input {
+  width: 100%;
+  padding: 13px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(194,205,214,0.14);
+  border-radius: 3px;
+  color: var(--white);
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 14px; font-weight: 300; letter-spacing: 0.3em;
+  text-align: center;
+  outline: none;
+  transition: border-color 200ms ease, background 200ms ease;
+}
+.guide-login-input:focus {
+  border-color: rgba(194,205,214,0.36);
+  background: rgba(255,255,255,0.07);
+}
+.guide-login-input::placeholder {
+  font-size: 11px; letter-spacing: 0.18em;
+  color: rgba(194,205,214,0.3);
+}
+
+.guide-login-btn {
+  padding: 13px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 3px;
+  color: var(--white);
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 10px; font-weight: 400; letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 200ms ease, border-color 200ms ease;
+  margin-top: 0.25rem;
+}
+.guide-login-btn:hover:not(:disabled) {
+  background: var(--glass-hover);
+  border-color: rgba(255,255,255,0.22);
+}
+.guide-login-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.guide-login-error {
+  font-size: 11px; font-weight: 300; letter-spacing: 0.06em;
+  color: rgba(255,170,150,0.9);
+}
+
+/* ── Entrance animations ── */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes guidePageEnter {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .guide-index-header {
+    animation: guidePageEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  }
+  .guide-card {
+    animation: guidePageEnter 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .guide-card:nth-child(1) { animation-delay: 0.22s; }
+  .guide-card:nth-child(2) { animation-delay: 0.28s; }
+  .guide-card:nth-child(3) { animation-delay: 0.34s; }
+  .guide-card:nth-child(4) { animation-delay: 0.40s; }
+  .guide-card:nth-child(5) { animation-delay: 0.46s; }
+  .guide-card:nth-child(6) { animation-delay: 0.52s; }
+  .guide-card:nth-child(7) { animation-delay: 0.58s; }
+  .guide-card:nth-child(8) { animation-delay: 0.64s; }
+  .guide-content-header {
+    animation: guidePageEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  }
+  .guide-accordion-list {
+    animation: guidePageEnter 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+  }
+  .guide-back-link {
+    animation: guidePageEnter 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+  }
+  .guide-login-card {
+    animation: guidePageEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  }
+}
