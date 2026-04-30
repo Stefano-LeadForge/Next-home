@@ -536,7 +536,7 @@ nav.nav--solid {
 
   /* Smaller title so it fits above the card */
   .hero-title {
-    font-size: clamp(2rem, 8vw, 2.8rem);
+    font-size: clamp(2.4rem, 9.5vw, 3.3rem);
     line-height: 1.1;
     margin-bottom: 1.25rem;
   }
