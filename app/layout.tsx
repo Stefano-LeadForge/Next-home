@@ -25,6 +25,43 @@ export const metadata: Metadata = {
   description: "La tua agenzia immobiliare di fiducia",
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["RealEstateAgent", "Organization"],
+      "@id": "https://nexthomemilano.it/#organization",
+      "name": "NextHome Milano",
+      "url": "https://nexthomemilano.it",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://nexthomemilano.it/logo.png",
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Paolo da Cannobio, 9",
+        "addressLocality": "Milano",
+        "postalCode": "20122",
+        "addressCountry": "IT",
+      },
+      "telephone": "+39 02 89744815",
+      "email": "info@nexthomemilano.it",
+      "sameAs": [
+        "https://www.instagram.com/nexthome_milano/",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nexthomemilano.it/#website",
+      "name": "NextHome Milano",
+      "url": "https://nexthomemilano.it",
+      "publisher": {
+        "@id": "https://nexthomemilano.it/#organization",
+      },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -32,6 +69,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="it" className={`${cormorant.variable} ${dmSans.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         <StaticNav />
         <SmoothScrolling>
