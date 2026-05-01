@@ -2708,7 +2708,7 @@ nav.nav--solid {
   margin: 1rem auto 0.2rem;
   width: 100%;
   max-width: 260px;
-  aspect-ratio: 5 / 7;
+  aspect-ratio: 4 / 5;
   border-radius: 5px;
   overflow: hidden;
   border: 1px solid rgba(194,205,214,0.10);
