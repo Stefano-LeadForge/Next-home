@@ -34,6 +34,9 @@ export default function GuideIndexPage() {
               {String(i + 1).padStart(2, '0')}
             </span>
             <span className="guide-card-label">{guide.label}</span>
+            {guide.subtitle && (
+              <span className="guide-card-subtitle">{guide.subtitle}</span>
+            )}
             <span className="guide-card-arrow" aria-hidden="true" />
           </a>
         ))}
