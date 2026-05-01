@@ -58,6 +58,16 @@ export default async function HeritageStayPage() {
               </div>
             </div>
 
+            {/* Intro: building entrance */}
+            <figure className="guide-step-photo guide-step-photo--intro">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/guide/heritage-stay/image1.png"
+                alt="Portone d'ingresso del palazzo"
+                loading="lazy"
+              />
+            </figure>
+
             <ol className="guide-steps">
               <li className="guide-step">
                 <span className="guide-step-num">1</span>
@@ -71,6 +81,14 @@ export default async function HeritageStayPage() {
                 <div className="guide-step-text">
                   <p>Comporre il codice <span className="guide-highlight">10</span>, premere il tasto <span className="guide-highlight">C</span> e telefonare al <strong>+39 353 356 3901</strong>. Il portone si apre automaticamente — la chiamata è gratuita e non richiede credito.</p>
                   <p className="guide-step-en">Dial code <span className="guide-highlight">10</span>, press the <span className="guide-highlight">C</span> key and call <strong>+39 353 356 3901</strong>. The door opens automatically — the call is free and does not require credit.</p>
+                  <figure className="guide-step-photo">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/guide/heritage-stay/image2.png"
+                      alt="Tastiera citofono — codice 10 + C e nome Lo Porto"
+                      loading="lazy"
+                    />
+                  </figure>
                 </div>
               </li>
               <li className="guide-step">
@@ -78,6 +96,14 @@ export default async function HeritageStayPage() {
                 <div className="guide-step-text">
                   <p>Prendere l&apos;ascensore e salire al <strong>3° piano</strong>. <em>Attenzione:</em> l&apos;ascensore ha due porte — uscire dalla porta <strong>opposta</strong> all&apos;entrata.</p>
                   <p className="guide-step-en">Take the elevator to the <strong>3rd floor</strong>. <em>Note:</em> the elevator has two doors — exit through the <strong>opposite</strong> door from where you entered.</p>
+                  <figure className="guide-step-photo">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/guide/heritage-stay/image3.png"
+                      alt="Ascensore con indica porta opposta"
+                      loading="lazy"
+                    />
+                  </figure>
                 </div>
               </li>
               <li className="guide-step">
@@ -85,6 +111,15 @@ export default async function HeritageStayPage() {
                 <div className="guide-step-text">
                   <p>Percorrere il corridoio e girare a destra.</p>
                   <p className="guide-step-en">Go down the corridor and turn right.</p>
+                  <figure className="guide-step-photo">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/guide/heritage-stay/image4.jpg"
+                      alt="Corridoio del piano"
+                      loading="lazy"
+                      style={{ objectPosition: 'center 18%' }}
+                    />
+                  </figure>
                 </div>
               </li>
               <li className="guide-step">
@@ -92,6 +127,15 @@ export default async function HeritageStayPage() {
                 <div className="guide-step-text">
                   <p>La porta dell&apos;appartamento è a sinistra.</p>
                   <p className="guide-step-en">The apartment door is on the left.</p>
+                  <figure className="guide-step-photo">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/guide/heritage-stay/image5.png"
+                      alt="Porta dell'appartamento — indicata dalla freccia a sinistra"
+                      loading="lazy"
+                      style={{ objectPosition: 'left center' }}
+                    />
+                  </figure>
                 </div>
               </li>
               <li className="guide-step">
@@ -99,6 +143,14 @@ export default async function HeritageStayPage() {
                 <div className="guide-step-text">
                   <p>Per recuperare le chiavi, aprire la keybox: codice <span className="guide-highlight">1020</span>.</p>
                   <p className="guide-step-en">To retrieve the keys, open the keybox: code <span className="guide-highlight">1020</span>.</p>
+                  <figure className="guide-step-photo">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/guide/heritage-stay/image6.jpg"
+                      alt="Keybox Master Lock per le chiavi"
+                      loading="lazy"
+                    />
+                  </figure>
                 </div>
               </li>
             </ol>
