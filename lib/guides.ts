@@ -1,7 +1,7 @@
 export const GUIDES = [
   { slug: 'guida-bb-1', label: 'Heritage Stay', subtitle: 'via degli Arcimboldi, 2 — Milano', envKey: 'GUIDE_BB_1_PASSWORD' },
   { slug: 'guida-bb-2', label: 'Lovely Home Navigli', subtitle: 'Alzaia Naviglio Pavese, 34 — Milano', envKey: 'GUIDE_BB_2_PASSWORD' },
-  { slug: 'guida-bb-3', label: 'Guida B&B 3', subtitle: '', envKey: 'GUIDE_BB_3_PASSWORD' },
+  { slug: 'guida-bb-3', label: 'Open Space Lambrate', subtitle: 'Via Caduti di Marcinelle, 14 — Milano', envKey: 'GUIDE_BB_3_PASSWORD' },
   { slug: 'guida-bb-4', label: 'Guida B&B 4', subtitle: '', envKey: 'GUIDE_BB_4_PASSWORD' },
   { slug: 'guida-bb-5', label: 'Guida B&B 5', subtitle: '', envKey: 'GUIDE_BB_5_PASSWORD' },
   { slug: 'guida-bb-6', label: 'Guida B&B 6', subtitle: '', envKey: 'GUIDE_BB_6_PASSWORD' },
