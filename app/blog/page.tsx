@@ -22,14 +22,14 @@ const ARTICLES = [
   },
   {
     id: 2,
-    href: '/blog',
+    href: '/blog/affitti-brevi-guida-massimizzare-ricavi',
     src: '/copertina-articolo-bnb.png',
     alt: 'Affitti Brevi Milano',
     category: 'Affitti Brevi',
     date: '28 Marzo 2026',
     title: 'Affitti brevi: guida completa per massimizzare i tuoi ricavi',
     excerpt:
-      'Tutto quello che devi sapere per gestire il tuo immobile su Airbnb e Booking: dalle fotografie professionali al pricing dinamico.',
+      'Tutto quello che devi sapere per gestire il tuo immobile su Airbnb e Booking: fotografie, pricing, recensioni, calendario, operatività e strategie concrete per aumentare prenotazioni e ricavi.',
     delay: 0.1,
   },
   {
